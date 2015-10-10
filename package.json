@@ -1,0 +1,17 @@
+{
+  "name": "Grunt-test-project",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-bower-concat": "^0.5.0",
+    "grunt-contrib-cssmin": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-nodeunit": "*",
+    "grunt-contrib-qunit": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-watch": "*",
+    "grunt-ssh": "*",
+    "matchdep": "*"
+  }
+}

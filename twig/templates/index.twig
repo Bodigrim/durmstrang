@@ -1,0 +1,52 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+
+  <h2>
+    Регистрация
+  </h2>
+
+  <form action="/actions/create.php" method="post" id="register">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" placeholder="noone@example.com" name="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="captcha">
+        <img src="https://latex.codecogs.com/gif.download?{{a}}+{{b}}=" alt="Если изображение не видно, то перезагрузите страницу" title="Если изображение не видно, то перезагрузите страницу" />
+      </label>
+      <input type="hidden" name="chash" value="{{ chash }}" />
+      <input type="text" class="form-control" id="capcha" placeholder="0" name="c" required />
+    </div>
+
+    <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+  </form>
+
+  <h2>
+    Вход
+  </h2>
+
+  <form action="/actions/login.php" method="post" id="login">
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email" class="form-control" id="email" placeholder="noone@example.com" name="email" required />
+    </div>
+
+    <div class="form-group">
+      <label for="password">Пароль</label>
+      <input type="password" class="form-control" id="password" placeholder="*********" name="password" required />
+    </div>
+
+    <button type="submit" class="btn btn-default">Войти</button>
+  </form>
+
+</div>
+</div>
+</div>
+
+{% include "footer.twig" %}
+{% endspaceless %}

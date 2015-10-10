@@ -1,0 +1,24 @@
+{
+  "name": "Durmstrang Applications",
+  "version": "0.0.0",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Andrew Lelechenko"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap-sortable": "~1.11.2",
+    "bootstrap": "~3.3.5"
+  }
+}

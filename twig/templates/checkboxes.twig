@@ -1,0 +1,5 @@
+{% for key, value in all %}
+  <label class="checkbox-inline">
+    <input type="checkbox" name="{{ name }}" {% if key==selected %}checked{% endif %} value="{{ key }}"> {{ value }}
+  </label>
+{% endfor %}

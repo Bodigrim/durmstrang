@@ -1,0 +1,7 @@
+{% for key, value in all %}
+  <div class="radio">
+  	<label>
+	    <input type="radio" name="{{ name }}" {% if key==selected %}checked{% endif %} value="{{ key }}"> {{ value }}
+	  </label>
+	 </div>
+{% endfor %}

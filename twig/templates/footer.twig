@@ -1,0 +1,13 @@
+<footer class="text-center text-muted">
+	© Bodigrim, 2015.
+</footer>
+
+<script src="/js/bundle.js"></script>
+
+{% for js in additional_js %}
+	<script src="/js/{{ js }}"></script>
+{% endfor %}
+
+</body>
+</html>
+

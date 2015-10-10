@@ -1,0 +1,91 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+
+
+  <h2>
+    Список заявок
+
+    <div class="pull-right">
+      <a href="/actions/logout.php" class="btn btn-danger">
+        Выйти
+      </a>
+    </div>
+
+  </h2>
+
+  <table class="table table-stripped sortable">
+    <thead>
+      <tr>
+        <th>
+          #
+        </th>
+        <th>
+          ФИО
+        </th>
+        <th>
+          Имя персонажа
+        </th>
+        <th>
+          Статус
+        </th>
+        <th>
+          Происхождение
+        </th>
+        <th>
+          Страна
+        </th>
+        <th>
+          Квота
+        </th>
+        <th>
+          Пометка
+        </th>
+      </tr>
+    </thead>
+    {% for user in users %}
+      <tr id="{{ user.email }}">
+        <td>
+          <a href="/edit.php?email={{ user.email | url_encode }}">
+            <i class="glyphicon glyphicon-edit"></i>
+            {{ user.id }}
+            {% if user.updated %}
+              &nbsp; <span class="label label-danger" title="Изменения в заявке"><i class="glyphicon glyphicon-pencil"></i></span>
+            {% endif %}
+            {% if user.unread %}
+              &nbsp; <span class="label label-danger" title="Новое сообщение"><i class="glyphicon glyphicon-envelope"></i></span>
+            {% endif %}
+          </a>
+        </td>
+        <td>
+          {{ user.name }}
+        </td>
+        <td>
+          {{ user.character_name }}
+        </td>
+        <td>
+          {{ ranks[user.rank] }}
+        </td>
+        <td>
+          {{ birthes[user.birth] }}
+        </td>
+        <td>
+          {{ countries[user.country] }}
+        </td>
+        <td>
+          {{ quotas[user.quota] }}
+        </td>
+        <td>
+          <select class="status-selector" data-email="{{ user.email }}">
+            {% include "select.twig" with {all: statuses, selected: user.status} %}
+          </select>
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+</div>
+
+{% include "footer.twig" with {additional_js : ["table.js"]} only %}
+{% endspaceless %}

@@ -1,0 +1,11 @@
+<?php
+if(!defined("INCMS")) die();
+
+define("PREF", "durmstrang_");
+define("COOKIE_DURATION", 1);
+define("DEBUG_REDIRECT", 0);
+define("BCRYPT_STRENGTH", 15);
+define("BCRYPT_SALT", "ZdhgxmpvNLqxnKouI5JSRy");
+define("ANTISPAM_SALT", "QFItiDm0bUWmd2MA1TzorO");
+
+?>
