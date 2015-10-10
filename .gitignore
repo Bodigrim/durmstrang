@@ -1,7 +1,7 @@
 .DS_Store
 bower_components
 composer.lock
-css/bundle.js
+css/bundle.css
 include/define.php
 js/bower.js
 js/bundle.js
