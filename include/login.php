@@ -59,13 +59,12 @@ function loginbypost(){
 
 	$post_get = new GetVarClass();
 
-	$login = $post_get->getvar("email");
 	$email = $post_get->getemail("email");
 	$pw    = $post_get->getvar("pw");
-	if(!($email || $login) || !$pw)
+	if(!$email || !$pw)
 		return 0;
 
-	$subquery = $email ? "u.email='$email'" : "u.login='$login'";
+	$subquery = "u.email='$email'";
 
 	$attempt=1;
 
