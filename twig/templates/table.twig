@@ -85,6 +85,12 @@
     {% endfor %}
   </table>
 
+  <div class="pull-right">
+    <a href="/actions/backup.php" class="btn btn-default">
+      Скачать бекап
+    </a>
+  </div>
+
 </div>
 
 {% include "footer.twig" with {additional_js : ["table.js"]} only %}
