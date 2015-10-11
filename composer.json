@@ -1,7 +1,6 @@
 {
 	"require": {
 		"twig/twig": "1.*",
-		"twig/extensions": "1.*",
-		"phpoffice/phpexcel": "dev-master"
+		"twig/extensions": "1.*"
 	}
 }
