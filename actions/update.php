@@ -74,11 +74,14 @@ if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 	$options->dir = "../photos/";
 	$options->is_critical = true;
 	$options->neoname = antispamhash($email) . ".jpg";
-	unlink("../photos/{$options->neoname}");
+	if(file_exists("../photos/{$options->neoname}")){
+		unlink("../photos/{$options->neoname}");
+		}
 
 	$filename = file_upload($options);
-	if($filename!=$options->neoname)
-		die("Не удалось загрузить фото $filename $neoname!");
+	if($filename!=$options->neoname){
+		rename($filename, $options->neoname);
+	}
 
 	$updated = true;
 	}
