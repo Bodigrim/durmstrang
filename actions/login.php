@@ -4,7 +4,7 @@ include "../include/config.php";
 
 $post_get = new GetVarClass();
 $email    = $post_get->getemail("email");
-$password = $post_get->getvar("password");
+$password = trim($post_get->getvar("password"));
 
 if(!$email)
 	die("Вход невозможен: введите корректный e-mail. ");

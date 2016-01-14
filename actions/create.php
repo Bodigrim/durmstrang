@@ -5,7 +5,7 @@ include "../include/config.php";
 function randomPassword(){
 	$n    = mt_rand();
 	$hash = antispamhash($n);
-	$ret  = substr($hash, 0, 8);
+	$ret  = substr(preg_replace("/[^a-zA-Z0-9]/", "", $hash), 0, 8);
 	return $ret;
 	}
 
