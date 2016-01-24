@@ -46,6 +46,7 @@ CREATE TABLE `durm_users` (
   `master_note` text,
   `updated` tinyint(3) unsigned DEFAULT NULL,
   `unread` tinyint(3) unsigned DEFAULT NULL,
+  `go_aqua_mortis` tinyint(3) unsigned DEFAULT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `active` (`active`),
   KEY `email` (`email`(20))

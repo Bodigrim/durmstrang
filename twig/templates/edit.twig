@@ -90,6 +90,11 @@
           {% include "radios.twig" with {all: publicities, selected: publicity, name: "publicity"} %}
         </div>
 
+        <div class="form-group">
+          <label>Собираетесь ли вы поехать на Дурмштранг: Aqua Mortis (23–28 июня 2016 г.)?</label>
+          {% include "radios.twig" with {all: goAquaMortises, selected: go_aqua_mortis, name: "go_aqua_mortis"} %}
+        </div>
+
       </div>
       <div role="tabpanel" class="tab-pane" id="character">
 

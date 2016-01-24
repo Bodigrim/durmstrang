@@ -37,15 +37,16 @@ $result = query($sql);
 $messages = fetch_assocs($result);
 
 $render_data = $userData + [
-	"justUpdated" => (bool)$justUpdated,
-	"isAdmin"     => (bool)isAdmin($editorid),
-	"publicities" => $langPublicities,
-	"countries"   => $langCountries,
-	"birthes"     => $langBirthes,
-	"ranks"       => $langRanks,
-	"quotas"      => $langQuotas,
-	"photo"       => file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "",
-	"messages"    => $messages,
+	"justUpdated"    => (bool)$justUpdated,
+	"isAdmin"        => (bool)isAdmin($editorid),
+	"publicities"    => $langPublicities,
+	"countries"      => $langCountries,
+	"birthes"        => $langBirthes,
+	"ranks"          => $langRanks,
+	"quotas"         => $langQuotas,
+	"goAquaMortises" => $langYesNo,
+	"photo"          => file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "",
+	"messages"       => $messages,
   ];
 
 $ret = constructTwig()->render("edit.twig", $render_data);

@@ -40,6 +40,9 @@
           Квота
         </th>
         <th>
+          Aqua Mortis
+        </th>
+        <th>
           Пометка
         </th>
       </tr>
@@ -75,6 +78,13 @@
         </td>
         <td>
           {{ quotas[user.quota] }}
+        </td>
+        <td>
+          {% if user.go_aqua_mortis %}
+            +
+          {% else %}
+            −
+          {% endif %}
         </td>
         <td data-value="{{ user.status }}">
           <select class="status-selector" data-email="{{ user.email }}">
