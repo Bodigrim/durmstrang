@@ -38,6 +38,13 @@
     <div class="tab-content">
       <div role="tabpanel" class="tab-pane active" id="gamer">
 
+        {% if isAdmin %}
+          <div class="form-group">
+            <label for="name">E-mail</label>
+            <input type="text" class="form-control" id="name" disabled value="{{ email }}" />
+          </div>
+        {% endif %}
+
         <div class="form-group">
           <label for="name">ФИО</label>
           <input type="text" class="form-control" id="name" placeholder="Иванов Иван Иванович" name="name" value="{{ name }}" />
