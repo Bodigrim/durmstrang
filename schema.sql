@@ -26,7 +26,7 @@ CREATE TABLE `durm_users` (
   `activecode` tinytext NOT NULL,
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `is_admin` tinyint(3) unsigned DEFAULT '0',
-  `status` enum('query','rejected','accepted') DEFAULT 'query',
+  `status` enum('query','rejected','accepted','archive') DEFAULT 'query',
   `nick` tinytext,
   `age` date NOT NULL,
   `contacts` text,

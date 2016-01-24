@@ -46,6 +46,7 @@ $langStatuses = [
 	"query"    => "На рассмотрении",
 	"rejected" => "Отклонена",
 	"accepted" => "Утверждена",
+	"archive"  => "Архив"
 	];
 
 $langPublicities = [
