@@ -44,9 +44,16 @@ function convOptions2Html($options, $old, $withempty){
 
 $langStatuses = [
 	"query"    => "На рассмотрении",
-	"rejected" => "Отклонена",
 	"accepted" => "Утверждена",
+	"rejected" => "Отклонена",
 	"archive"  => "Архив"
+	];
+
+$ordStatuses = [
+	"query"    => 0,
+	"accepted" => 1,
+	"rejected" => 2,
+	"archive"  => 3
 	];
 
 $langPublicities = [

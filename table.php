@@ -16,6 +16,7 @@ $userData = fetch_assocs($result);
 $render_data = [
 	"users"       => $userData,
 	"statuses"    => $langStatuses,
+	"ordStatuses" => $ordStatuses,
 	"publicities" => $langPublicities,
 	"countries"   => $langCountries,
 	"birthes"     => $langBirthes,

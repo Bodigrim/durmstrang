@@ -86,7 +86,7 @@
             −
           {% endif %}
         </td>
-        <td data-value="{{ user.status }}">
+        <td data-value="{{ ordStatuses[user.status] }}">
           <select class="status-selector" data-email="{{ user.email }}">
             {% include "select.twig" with {all: statuses, selected: user.status} %}
           </select>
