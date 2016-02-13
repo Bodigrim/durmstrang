@@ -1,3 +1,7 @@
+String.prototype.nl2br = function(){
+  return this.replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1<br />$2');
+}
+
 $(function(){
 	$('#delete-form').submit(function(){
 		return confirm("Вы уверены, что хотите удалить заявку безвозвратно?");
@@ -18,7 +22,7 @@ $(function(){
 		};
 		$.post("/actions/send-message.php", hash, function(){
 			$('#message').val("");
-			$('#messages').append("<b>Новое сообщение:</b><br />" + message + "<hr />");
+			$('#messages').append("<b>Новое сообщение:</b><br />" + message.nl2br() + "<hr />");
 		});
 
 		return false;

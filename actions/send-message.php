@@ -27,7 +27,7 @@ $sql = "UPDATE ".PREF."messages
 	LIMIT 1";
 query($sql);
 
-$message_out = nl2br($message);
+$message_out = nl2br(db_unescape($message));
 $link = $_SERVER["HTTP_HOST"] . "/edit.php?" . http_build_query(["email" => $email]);
 if($editorid==$userid){
 	markUnread($userid);
