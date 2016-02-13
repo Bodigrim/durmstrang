@@ -7,7 +7,7 @@ $email    = $post_get->getemail("email");
 $password = trim($post_get->getvar("password"));
 
 if(!$email)
-	die("Вход невозможен: введите корректный e-mail. ");
+	die("Введите корректный e-mail, чтобы войти или восстановить пароль. ");
 
 $userid = emailToId($email);
 if(!$userid){
