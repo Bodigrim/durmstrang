@@ -9,9 +9,15 @@
     Заявка
 
     <div class="pull-right">
+    {% if isAdmin %}
+      <a href="/" class="btn btn-primary">
+        К таблице игроков
+      </a>
+    {% else %}
       <a href="/actions/logout.php" class="btn btn-danger">
         Выйти
       </a>
+    {% endif %}
     </div>
   </h2>
 
