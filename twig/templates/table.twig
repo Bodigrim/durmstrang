@@ -43,6 +43,9 @@
           Aqua Mortis
         </th>
         <th>
+          Взнос
+        </th>
+        <th>
           Пометка
         </th>
       </tr>
@@ -85,6 +88,9 @@
           {% else %}
             −
           {% endif %}
+        </td>
+        <td data-value="{{ user.payment_aqua_mortis }}" {% if user.go_aqua_mortis and not user.payment_aqua_mortis %} class="bg-danger" {% endif %}>
+          <input type="checkbox" class="payment-checkbox" data-email="{{ user.email }}" {% if user.payment_aqua_mortis %} checked {% endif %}>
         </td>
         <td data-value="{{ ordStatuses[user.status] }}">
           <select class="status-selector" data-email="{{ user.email }}">
