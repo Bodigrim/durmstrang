@@ -8,5 +8,6 @@ js/bundle.js
 db.json
 node_modules/
 photos/*
+!photos/.htaccess
 twig/cache
 vendor
