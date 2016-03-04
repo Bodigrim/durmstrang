@@ -9,7 +9,7 @@ if(!isAdmin($editorid))
 $sql = "SELECT *
 	FROM ".PREF."users
 	WHERE active=1
-	ORDER BY id DESC";
+	ORDER BY go_aqua_mortis DESC, id DESC";
 $result = query($sql);
 $userData = fetch_assocs($result);
 
