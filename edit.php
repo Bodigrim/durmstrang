@@ -19,7 +19,7 @@ $sql = "SELECT *
 	LIMIT 1";
 $result = query($sql);
 $userData = fetch_assoc($result);
-$photoname = antispamhash($email);
+$photoname = photoFileName($email);
 
 $userid = (int)emailToId($email);
 

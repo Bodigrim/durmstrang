@@ -56,6 +56,10 @@ function antispamhash($id){
 	return $ret;
 	}
 
+function photoFileName($email){
+	return strtr(antispamhash($email), "/", "_");
+	}
+
 function array_flatten($ar){
 	return array_reduce($ar, "array_merge", []);
 	}

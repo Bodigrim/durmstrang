@@ -75,7 +75,7 @@ if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 	$options->extensions = ["png", "jpg", "jpeg", "gif"];
 	$options->dir = "../photos/";
 	$options->is_critical = true;
-	$options->neoname = antispamhash($email) . ".jpg";
+	$options->neoname = photoFileName($email) . ".jpg";
 	if(file_exists("../photos/{$options->neoname}")){
 		unlink("../photos/{$options->neoname}");
 		}
