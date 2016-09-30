@@ -40,7 +40,7 @@
           Квота
         </th>
         <th>
-          Aqua Mortis
+          Royal Wedding
         </th>
         <th>
           Взнос
@@ -83,14 +83,14 @@
           {{ quotas[user.quota] }}
         </td>
         <td>
-          {% if user.go_aqua_mortis %}
+          {% if user.go_royal_wedding %}
             +
           {% else %}
             −
           {% endif %}
         </td>
-        <td data-value="{{ user.payment_aqua_mortis }}" {% if user.go_aqua_mortis and not user.payment_aqua_mortis %} class="bg-danger" {% endif %}>
-          <input type="checkbox" class="payment-checkbox" data-email="{{ user.email }}" {% if user.payment_aqua_mortis %} checked {% endif %}>
+        <td data-value="{{ user.payment_royal_wedding }}" {% if user.go_royal_wedding and not user.payment_royal_wedding %} class="bg-danger" {% endif %}>
+          <input type="checkbox" class="payment-checkbox" data-email="{{ user.email }}" {% if user.payment_royal_wedding %} checked {% endif %}>
         </td>
         <td data-value="{{ ordStatuses[user.status] }}">
           <select class="status-selector" data-email="{{ user.email }}">

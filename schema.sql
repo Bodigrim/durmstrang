@@ -48,6 +48,8 @@ CREATE TABLE `durm_users` (
   `unread` tinyint(3) unsigned DEFAULT NULL,
   `go_aqua_mortis` tinyint(3) unsigned DEFAULT NULL,
   `payment_aqua_mortis` tinyint(3) unsigned DEFAULT NULL,
+  `go_royal_wedding` tinyint(3) unsigned DEFAULT NULL,
+  `payment_royal_wedding` tinyint(3) unsigned DEFAULT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `active` (`active`),
   KEY `email` (`email`(20))

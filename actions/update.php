@@ -29,7 +29,7 @@ $rank             = $post_get->getenumkeys("rank", $langRanks);
 $quota            = $post_get->getenumkeys("quota", $langQuotas);
 $quenta           = $post_get->getvar("quenta");
 $wishes2          = $post_get->getvar("wishes2");
-$go_aqua_mortis   = $post_get->getvar("go_aqua_mortis", "0|1", "0");
+$go_royal_wedding = $post_get->getvar("go_royal_wedding", "0|1", "0");
 
 if(isAdmin($editorid)){
 	$master_note = $post_get->getvar("master_note");
@@ -61,7 +61,7 @@ $sql = "UPDATE ".PREF."users
 		quenta='$quenta',
 		wishes2='$wishes2',
 		master_note='$master_note',
-		go_aqua_mortis=$go_aqua_mortis
+		go_royal_wedding=$go_royal_wedding
 
 	WHERE email='$email'
 	LIMIT 1";
