@@ -250,4 +250,13 @@ function canEdit($editorid, $email){
 	return $ret;
 	}
 
+function sendDownloadHeaders($contentType, $filename){
+  if(headers_sent())
+    throw new Exception("sendDownloadHeaders: headers has been already sent");
+
+  header("Content-Type: $contentType");
+  header("Content-Disposition: attachment;filename=\"$filename\"");
+  header('Cache-Control: max-age=0');
+}
+
 ?>

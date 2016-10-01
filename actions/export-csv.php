@@ -2,23 +2,40 @@
 
 include "../include/config.php";
 
+function sendCsvHeaders($filename){
+  sendDownloadHeaders("text/csv", $filename);
+}
+
 $editorid = loginbycookie();
 if(!isAdmin($editorid))
 	die("У вас недостаточно прав доступа, чтобы скачать CSV. ");
 
-header("Content-Type: text/csv");
-header("Content-Disposition: attachment;filename=\"base.csv\"");
-header("Cache-Control: max-age=0");
+$hiddenFields =
+  [ "pwhash"
+  , "pw"
+  , "active"
+  , "activecode"
+  , "added"
+  , "is_admin"
+  , "photo_src"
+  , "updated"
+  , "unread"
+  , "quenta"
+  ];
+
+sendCsvHeaders(PROJECT_NAME . ".csv");
 
 $out = fopen('php://output', 'w');
 
-$sql = "SELECT * 
-	FROM ".PREF."users AS u  
+$sql = "SELECT *
+	FROM ".PREF."users AS u
 	ORDER BY u.id";
 $result = query($sql);
 
 while($row = fetch_assoc($result)){
-	unset($row["pwhash"], $row["pw"], $row["active"], $row["activecode"], $row["added"], $row["is_admin"], $row["photo_src"], $row["updated"], $row["unread"], $row["quenta"]);
+  foreach($hiddenFields as $hiddenField){
+    unset($row[$hiddenField]);
+  }
 	fputcsv($out, $row);
 	}
 
