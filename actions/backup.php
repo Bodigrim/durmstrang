@@ -3,12 +3,7 @@
 include "../include/config.php";
 
 function sendSqlHeaders($filename){
-  if(headers_sent())
-    throw new Exception("sendSqlHeaders: headers has been already sent");
-
-  header("Content-Type: application/sql");
-  header("Content-Disposition: attachment;filename=\"$filename\"");
-  header('Cache-Control: max-age=0');
+  sendDownloadHeaders("application/sql", $filename);
 }
 
 function commandToDumpTables($tableNames){
