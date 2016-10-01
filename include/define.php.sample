@@ -1,6 +1,7 @@
 <?php
 if(!defined("INCMS")) die();
 
+define("PROJECT_NAME", "project");
 define("PREF", "durmstrang_");
 define("COOKIE_DURATION", 1);
 define("DEBUG_REDIRECT", 0);
