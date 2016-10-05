@@ -7,7 +7,7 @@ function mail_init($content="text/html", $charset="utf-8"){
 	ini_set("SMTP", "mail." . $host);
 	ini_set("sendmail_from", $from);
 
-	$header = "From: Durmstrang <{$from}>\r\n";
+	$header = "From: Youkon-2016 <{$from}>\r\n";
 	$header.= "Content-Type: $content; charset=$charset\r\n";
 
 	return $header;
@@ -51,7 +51,7 @@ function send_mail_to_admin($subject, $text){
 		WHERE is_admin<>0";
 	$result = query($sql);
 	$emails = fetch_column($result);
-	$emails[] = "durmstrang.kiev.ua@gmail.com";
+	// $emails[] = "reg@youkon.com.ua";
 	return send_mail_to_all($emails, $subject, $text);
 	}
 

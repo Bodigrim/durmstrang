@@ -25,28 +25,25 @@
           ФИО
         </th>
         <th>
-          Имя персонажа
+          Ник
         </th>
         <th>
-          Статус
+          Город
         </th>
         <th>
-          Происхождение
-        </th>
-        <th>
-          Страна
-        </th>
-        <th>
-          Квота
-        </th>
-        <th>
-          Royal Wedding
+          Группа поселения
         </th>
         <th>
           Взнос
         </th>
         <th>
-          Пометка
+          Питание
+        </th>
+        <th>
+          Комната
+        </th>
+        <th>
+          Статус
         </th>
       </tr>
     </thead>
@@ -65,32 +62,30 @@
           </a>
         </td>
         <td>
-          {{ user.name }}
-        </td>
-        <td>
-          {{ user.character_name }}
-        </td>
-        <td>
-          {{ ranks[user.rank] }}
-        </td>
-        <td>
-          {{ birthes[user.birth] }}
-        </td>
-        <td>
-          {{ countries[user.country] }}
-        </td>
-        <td>
-          {{ quotas[user.quota] }}
-        </td>
-        <td>
-          {% if user.go_royal_wedding %}
-            +
+          {% if user.name %}
+            {{ user.name }}
           {% else %}
-            −
+            {{ user.email }}
           {% endif %}
         </td>
-        <td data-value="{{ user.payment_royal_wedding }}" {% if user.go_royal_wedding and not user.payment_royal_wedding %} class="bg-danger" {% endif %}>
-          <input type="checkbox" class="payment-checkbox" data-email="{{ user.email }}" {% if user.payment_royal_wedding %} checked {% endif %}>
+        <td>
+          {{ user.nick }}
+        </td>
+        <td>
+          {{ user.city }}
+        </td>
+        <td>
+          {{ user.groupName }}
+        </td>
+        <td data-value="{{ user.payment }}" {% if not user.payment %} class="bg-danger" {% endif %}>
+          <input type="checkbox" class="payment-checkbox" data-email="{{ user.email }}" {% if user.payment %} checked {% endif %}>
+        </td>
+        <td data-value="{{ user.payment_food }}" {% if not user.payment_food %} class="bg-danger" {% endif %}>
+          <input type="checkbox" class="payment-food-checkbox" data-email="{{ user.email }}" {% if user.payment_food %} checked {% endif %}>
+        </td>
+        <td data-value="{{ user.payment_room }}" {% if not user.payment_room %} class="bg-danger" {% endif %}>
+          <input type="checkbox" class="payment-room-checkbox" data-email="{{ user.email }}" {% if user.payment_room %} checked {% endif %}>
+          {{ rooms[user.room] }}
         </td>
         <td data-value="{{ ordStatuses[user.status] }}">
           <select class="status-selector" data-email="{{ user.email }}">
@@ -105,9 +100,7 @@
     <a href="/actions/backup.php" class="btn btn-default">
       Скачать бекап
     </a>
-  </div>
-
-  <div class="pull-right">
+    &nbsp;
     <a href="/actions/export-csv.php" class="btn btn-default">
       Скачать CSV
     </a>

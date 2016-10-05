@@ -133,30 +133,58 @@ function set_login_cookies($userid, $email, $pwhash){
 	cookie_set_httponly("session", $session, 0, "/");
 	}
 
-function remindPassword($userid){
-	$sql = "SELECT email, pw
-		FROM ".PREF."users
-		WHERE active=1 AND id=$userid
-		LIMIT 1";
-	$result = query($sql);
-	$rows = num_rows($result);
-	if(!$rows)
-		die("Регистрационные данные не будут высланы: пользователь №{$userid} не найден. ");
-	list($mail, $password) = fetch_row($result);
+class UserRenderData
+{
+	private $name;
+	private $email;
+	private $password;
 
+	function __construct($userid){
+		$sql = "SELECT name, email, pw
+			FROM ".PREF."users
+			WHERE active=1 AND id=$userid
+			LIMIT 1";
+		$result = query($sql);
+		$rows = num_rows($result);
+		if(!$rows)
+			throw new Exception("UserRenderData->__construct: userid {$userid} not found");
 
-	$subject = "Регистрация в базе заявок Дурмштранга";
-
-	$text = <<<EOT
-	Вы зарегистрировались в базе заявок Дурмштранга.
-	<br />
-	Ваш пароль: {$password}
-	<br />
-	По техническим вопросам обращайтесь к Бодигриму (andrew.lelechenko@gmail.com, skype bodigrim).
-EOT;
-
-	send_mail_by_userid($userid, $subject, $text);
+		list($this->name, $this->email, $this->password) = fetch_row($result);
 	}
+
+	function toArray(){
+		return
+			[ "userName"     => $this->name
+			, "userEmail"    => $this->email
+			, "userPassword" => $this->password
+			];
+	}
+
+}
+
+function remindPassword($userid){
+	$renderData = (new UserRenderData($userid))->toArray();
+
+	$userSubject = "Ты забыл пароль, но это не беда";
+	$userText = constructTwig()->render("mails/password-reminder.twig", $renderData);
+	send_mail_by_userid($userid, $userSubject, $userText);
+	}
+
+function sendMailAfterUserRegistration($userid){
+	$renderData = (new UserRenderData($userid))->toArray();
+
+	$userSubject = "Ты зарегистрировался на VII фестиваль Юкон-2016";
+	$userText = constructTwig()->render("mails/user-registration.twig", $renderData);
+	send_mail_by_userid($userid, $userSubject, $userText);
+	}
+
+function sendMailAfterUserCompletion($userid){
+	$renderData = (new UserRenderData($userid))->toArray();
+
+	$adminSubject = "Зарегистрирован новый пользователь";
+	$adminText = constructTwig()->render("mails/user-registration-admin.twig", $renderData);
+	send_mail_to_admin($adminSubject, $adminText);
+}
 
 function loginbycookie(){
 	$cookie_get = new GetVarClass("_COOKIE");
@@ -185,6 +213,7 @@ function loginbycookie(){
 	}
 
 function emailToId($email){
+	$email = (string)$email;
 	$sql = "SELECT id
 		FROM ".PREF."users
 		WHERE active=1 AND email='$email'
@@ -194,6 +223,7 @@ function emailToId($email){
 	}
 
 function idToEmail($id){
+	$id = (int)$id;
 	$sql = "SELECT email
 		FROM ".PREF."users
 		WHERE active=1 AND id=$id
@@ -202,7 +232,18 @@ function idToEmail($id){
 	return $ret;
 	}
 
+function groupIdToGroupName($id){
+	$id = (int)$id;
+	$sql = "SELECT group_name
+		FROM ".PREF."users
+		WHERE active=1 AND id=$id
+		LIMIT 1";
+	$ret = (string)db_result00($sql);
+	return $ret;
+	}
+
 function isAdmin($id){
+	$id = (int)$id;
 	$sql = "SELECT is_admin
 		FROM ".PREF."users
 		WHERE active=1 AND id=$id
@@ -212,6 +253,7 @@ function isAdmin($id){
 	}
 
 function markUpdated($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET updated=1
 		WHERE id=$id
@@ -220,6 +262,7 @@ function markUpdated($id){
 	}
 
 function unmarkUpdated($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET updated=0
 		WHERE id=$id
@@ -228,6 +271,7 @@ function unmarkUpdated($id){
 	}
 
 function markUnread($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET unread=1
 		WHERE id=$id
@@ -236,6 +280,7 @@ function markUnread($id){
 	}
 
 function unmarkUnread($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET unread=0
 		WHERE id=$id
@@ -257,6 +302,78 @@ function sendDownloadHeaders($contentType, $filename){
   header("Content-Type: $contentType");
   header("Content-Disposition: attachment;filename=\"$filename\"");
   header('Cache-Control: max-age=0');
+}
+
+function multspell($n, $form1, $form2, $form3){
+  /* анкета, анкеты, анкет */
+  return $n >= 5 && $n <= 20 || $n % 10 > 4 || $n % 10 == 0
+  	? $form3
+  	: ($n % 10 == 1 ? $form1 : $form2);
+  }
+
+function randomDefaultGroupName(){
+	$first =
+		[ "Артистичный"
+		, "Большой"
+		, "Вольный"
+		, "Грозный"
+		, "Дикий"
+		, "Ездовой"
+		, "Жизнерадостный"
+		, "Злой"
+		, "Игривый"
+		, "Колючий"
+		, "Лунный"
+		, "Маленький"
+		, "Несгибаемый"
+		, "Огнегривый"
+		, "Певучий"
+		, "Разъярённый"
+		, "Степной"
+		, "Торопливый"
+		, "Ужасный"
+		, "Фыркающий"
+		, "Хороший"
+		, "Цепкий"
+		, "Чёрный"
+		, "Шипящий"
+		, "Этот"
+		, "Юный"
+		, "Яркий"
+		];
+
+	$second =
+		[ "Ангел"
+		, "Бурундук"
+		, "Вепрь"
+		, "Голубь"
+		, "Дуб"
+		, "Ёж"
+		, "Журавль"
+		, "Зубр"
+		, "Йогурт"
+		, "Крот"
+		, "Лис"
+		, "Мамонт"
+		, "Носорог"
+		, "Олень"
+		, "Пеликан"
+		, "Рак"
+		, "Страус"
+		, "Трус"
+		, "Упырь"
+		, "Филин"
+		, "Хомяк"
+		, "Царь"
+		, "Червяк"
+		, "Щавель"
+		, "Эмо"
+		, "Юпитер"
+		, "Якорь"
+		];
+
+	$ret = $first[rand() % count($first)] . " " . $second[rand() % count($second)];
+	return $ret;
 }
 
 ?>

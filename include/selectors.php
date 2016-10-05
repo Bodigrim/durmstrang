@@ -43,17 +43,21 @@ function convOptions2Html($options, $old, $withempty){
 	}
 
 $langStatuses = [
-	"query"    => "На рассмотрении",
-	"accepted" => "Утверждена",
-	"rejected" => "Отклонена",
-	"archive"  => "Архив"
+  'query'               => "На рассмотрении",
+  'participant'         => "Участник",
+  'participant_no_room' => "Участник без поселения",
+  'special_guest'       => "Почетный гость",
+  'committee'           => "Оргкомитет",
+  'rejected'            => "Заявка отклонена",
 	];
 
 $ordStatuses = [
-	"query"    => 0,
-	"accepted" => 1,
-	"rejected" => 2,
-	"archive"  => 3
+  'query'               => 0,
+  'participant'         => 1,
+  'participant_no_room' => 2,
+  'special_guest'       => 3,
+  'committee'           => 4,
+  'rejected'            => 5,
 	];
 
 $langPublicities = [
@@ -118,5 +122,13 @@ $langYesNo = [
 	0 => "Нет",
 	1 => "Да",
 	];
+
+$langRooms = [
+  "no-room"  => "Без поселения",
+  "econom"   => "Эконом (160 грн.)",
+  "standard" => "Стандарт (330 грн.)",
+  "halflux"  => "Полулюкс (420 грн.)",
+  "lux"      => "VIP (1320 грн.)",
+  ];
 
 ?>

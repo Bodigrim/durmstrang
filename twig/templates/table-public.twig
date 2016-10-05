@@ -1,0 +1,76 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+
+
+  <h2>
+    Список заявок
+
+    <div class="pull-right">
+    {% if isAdmin %}
+      <a href="/" class="btn btn-primary">
+        К таблице участников
+      </a>
+    {% elseif isLoggedIn %}
+      <a href="/" class="btn btn-primary">
+        К моей анкете
+      </a>
+      &nbsp;
+      <a href="/actions/logout.php" class="btn btn-danger">
+        Выйти
+      </a>
+    {% else %}
+      <a href="/" class="btn btn-primary">
+        Зарегистрироваться
+      </a>
+    {% endif %}
+    </div>
+
+  </h2>
+
+  <table class="table table-striped sortable">
+    <thead>
+      <tr>
+        <th>
+          ФИО
+        </th>
+        <th>
+          Ник
+        </th>
+        <th>
+          Город
+        </th>
+        <th>
+          Группа поселения
+        </th>
+        <th>
+          Статус
+        </th>
+      </tr>
+    </thead>
+    {% for user in users %}
+      <tr id="{{ user.email }}">
+        <td>
+          {{ user.name }}
+        </td>
+        <td>
+          {{ user.nick }}
+        </td>
+        <td>
+          {{ user.city }}
+        </td>
+        <td>
+          {{ user.groupName }}
+        </td>
+        <td>
+          {{ statuses[user.status] }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+</div>
+
+{% include "footer.twig" with {additional_js : ["table.js"]} only %}
+{% endspaceless %}

@@ -26,7 +26,7 @@ $updated = (bool)affected_rows();
 if($updated){
 	$status_out = $langStatuses[$status];
 	$link = $_SERVER["HTTP_HOST"] . "/edit.php?" . http_build_query(["email" => $email]);
-	send_mail_by_userid(emailToId($email), "Мастер изменил статус вашей заявки на " . $status_out, "<a href=\"$link\">Просмотреть</a>");
+	// send_mail_by_userid(emailToId($email), "Мастер изменил статус вашей заявки на " . $status_out, "<a href=\"$link\">Просмотреть</a>");
 	}
 
 ?>

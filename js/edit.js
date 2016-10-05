@@ -3,8 +3,15 @@ String.prototype.nl2br = function(){
 }
 
 $(function(){
-	$('#delete-form').submit(function(){
-		return confirm("Вы уверены, что хотите удалить заявку безвозвратно?");
+	$('#delete-btn').click(function(){
+		if(confirm("Вы уверены, что хотите удалить заявку безвозвратно?")){
+			$.post
+				( "/actions/delete.php"
+				, { email: $(this).attr("data-email") }
+				, function(){ location = "/"; }
+				)
+		}
+		return false;
 	});
 
 	$('#send-message').click(function(){
@@ -27,4 +34,20 @@ $(function(){
 
 		return false;
 	});
+
+	$('#settlement-self').change(function(){
+		$('#group-name').attr("disabled", true);
+		$('#group-id').attr("disabled", true);
+	})
+
+	$('#settlement-owner').change(function(){
+		$('#group-name').attr("disabled", false);
+		$('#group-id').attr("disabled", true);
+	})
+
+	$('#settlement-member').change(function(){
+		$('#group-name').attr("disabled", true);
+		$('#group-id').attr("disabled", false);
+	})
+
 });

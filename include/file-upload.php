@@ -26,7 +26,7 @@ function file_upload($options){
 
 	if(!isset($_FILES[$options->key])){
 		if($options->is_critical)
-			die("\$_FILES[{$options->key}] isn't set!");
+			throw new Exception("\$_FILES[{$options->key}] isn't set!");
 		return;
 		}
 
@@ -34,7 +34,7 @@ function file_upload($options){
 
 	if($file["error"]){
 		if($options->is_critical)
-			die("<a href=\"http://www.php.net/manual/en/features.file-upload.errors.php\">Error {$file["error"]}!</a>");
+			throw new Exception("<a href=\"http://www.php.net/manual/en/features.file-upload.errors.php\">Error {$file["error"]}!</a>");
 		return;
 		}
 
@@ -51,7 +51,7 @@ function file_upload($options){
 
 	if(!in_array($extension, $options->extensions)){
 		if($options->is_critical)
-			die("Unexpected file extension $extension!");
+			throw new Exception("Unexpected file extension $extension!");
 		return;
 		}
 
@@ -77,7 +77,7 @@ function file_upload($options){
 
 	if(!move_uploaded_file($file['tmp_name'], $uploadfile)){
 		if($options->is_critical)
-			die("Cannot move uploaded file!");
+			throw new Exception("Cannot move uploaded file!");
 		return;
 		}
 

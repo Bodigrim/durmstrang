@@ -15,7 +15,7 @@ if(!isAdmin($editorid))
 $payment = $post_get->getvar("payment", 1, 0);
 
 $sql = "UPDATE ".PREF."users
-  SET payment=$payment
+  SET payment_room=$payment
   WHERE email='$email'
   LIMIT 1";
 query($sql);

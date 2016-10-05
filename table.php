@@ -6,10 +6,11 @@ $editorid = loginbycookie();
 if(!isAdmin($editorid))
 	die("У вас недостаточно прав доступа, чтобы просматривать список заявок. ");
 
-$sql = "SELECT *
-	FROM ".PREF."users
-	WHERE active=1
-	ORDER BY go_royal_wedding DESC, id DESC";
+$sql = "SELECT u.*, g.group_name as groupName
+	FROM ".PREF."users AS u
+	LEFT JOIN ".PREF."users AS g ON u.group_id=g.id
+	WHERE u.active=1
+	ORDER BY u.id DESC";
 $result = query($sql);
 $userData = fetch_assocs($result);
 
@@ -17,11 +18,7 @@ $render_data = [
 	"users"       => $userData,
 	"statuses"    => $langStatuses,
 	"ordStatuses" => $ordStatuses,
-	"publicities" => $langPublicities,
-	"countries"   => $langCountries,
-	"birthes"     => $langBirthes,
-	"ranks"       => $langRanks,
-	"quotas"      => $langQuotas,
+  "rooms"       => $langRooms,
   ];
 
 $ret = constructTwig()->render("table.twig", $render_data);

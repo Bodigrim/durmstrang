@@ -43,7 +43,7 @@ $sql = "INSERT INTO ".PREF."users (email, pw, pwhash, active)
 query($sql);
 $userid = insert_id();
 
-remindPassword($userid);
+sendMailAfterUserRegistration($userid);
 
 set_login_cookies($userid, $email, $hash);
 

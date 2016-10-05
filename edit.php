@@ -36,17 +36,27 @@ $sql = "SELECT m.id, u.name, m.message
 $result = query($sql);
 $messages = fetch_assocs($result);
 
+$sql = "SELECT u.id, u.group_name
+	FROM ".PREF."users AS u
+	WHERE u.active=1 AND u.group_owner=1 AND u.group_name<>'' AND u.id<>$userid
+	ORDER BY u.group_name";
+$result = query($sql);
+$groups = fetch_rows($result, 1, true);
+
+$sql = "SELECT DiSTINCT u.city
+	FROM ".PREF."users AS u
+	ORDER BY u.city";
+$result = query($sql);
+$citySuggestions = fetch_column($result);
+
 $render_data = $userData + [
-	"justUpdated"     => (bool)$justUpdated,
-	"isAdmin"         => (bool)isAdmin($editorid),
-	"publicities"     => $langPublicities,
-	"countries"       => $langCountries,
-	"birthes"         => $langBirthes,
-	"ranks"           => $langRanks,
-	"quotas"          => $langQuotas,
-	"goRoyalWeddings" => $langYesNo,
-	"photo"           => file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "",
-	"messages"        => $messages,
+	"justUpdated"      => (bool)$justUpdated,
+	"isAdmin"          => (bool)isAdmin($editorid),
+	"photo"            => file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "",
+	"defaultGroupName" => randomDefaultGroupName(),
+	"rooms"            => $langRooms,
+	"groups"           => $groups,
+	"citySuggestions"  => $citySuggestions,
   ];
 
 $ret = constructTwig()->render("edit.twig", $render_data);
