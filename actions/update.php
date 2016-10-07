@@ -82,7 +82,7 @@ if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 
 	$filename = file_upload($options);
 	if($filename!=$options->neoname){
-		rename($filename, $options->neoname);
+		rename("../photos/" . $filename, "../photos/" . $options->neoname);
 	}
 
 	$updated = true;
