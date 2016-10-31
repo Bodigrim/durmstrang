@@ -9,4 +9,9 @@ define("BCRYPT_STRENGTH", 15);
 define("BCRYPT_SALT", "ZdhgxmpvNLqxnKouI5JSRy");
 define("ANTISPAM_SALT", "QFItiDm0bUWmd2MA1TzorO");
 
+define("SENDPULSE_API_USER_ID", "");
+define("SENDPULSE_API_SECRET", "");
+define("SENDPULSE_FROM_NAME", "");
+define("SENDPULSE_FROM_EMAIL", "");
+
 ?>

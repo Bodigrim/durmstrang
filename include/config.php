@@ -11,8 +11,10 @@ db_and_errors_init($servers);
 require "const.php";
 require "getvar.php";
 require "cookie.php";
+
+require "sendpulseInterface.php";
+require "sendpulse.php";
 require "mail.php";
-define("MAILHEADERS", mail_init());
 
 require "selectors.php";
 require "misc.php";
