@@ -185,6 +185,7 @@ function loginbycookie(){
 	}
 
 function emailToId($email){
+	$email = (string)$email;
 	$sql = "SELECT id
 		FROM ".PREF."users
 		WHERE active=1 AND email='$email'
@@ -194,6 +195,7 @@ function emailToId($email){
 	}
 
 function idToEmail($id){
+	$id = (int)$id;
 	$sql = "SELECT email
 		FROM ".PREF."users
 		WHERE active=1 AND id=$id
@@ -203,6 +205,7 @@ function idToEmail($id){
 	}
 
 function isAdmin($id){
+	$id = (int)$id;
 	$sql = "SELECT is_admin
 		FROM ".PREF."users
 		WHERE active=1 AND id=$id
@@ -212,6 +215,7 @@ function isAdmin($id){
 	}
 
 function markUpdated($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET updated=1
 		WHERE id=$id
@@ -220,6 +224,7 @@ function markUpdated($id){
 	}
 
 function unmarkUpdated($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET updated=0
 		WHERE id=$id
@@ -228,6 +233,7 @@ function unmarkUpdated($id){
 	}
 
 function markUnread($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET unread=1
 		WHERE id=$id
@@ -236,6 +242,7 @@ function markUnread($id){
 	}
 
 function unmarkUnread($id){
+	$id = (int)$id;
 	$sql = "UPDATE ".PREF."users
 		SET unread=0
 		WHERE id=$id

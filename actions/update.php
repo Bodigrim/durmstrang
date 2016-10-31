@@ -12,6 +12,8 @@ $editorid = loginbycookie();
 if(!canEdit($editorid, $email))
 	die("У вас недостаточно прав доступа, чтобы редактировать заявку {$email}. ");
 
+$userid = emailToId($email);
+
 $name             = $post_get->getvar("name");
 $nick             = $post_get->getvar("nick");
 $city             = $post_get->getvar("city");
@@ -37,7 +39,7 @@ if(isAdmin($editorid)){
 else {
 	$sql = "SELECT master_note
 		FROM ".PREF."users
-		WHERE email='$email'
+		WHERE id=$userid
 		LIMIT 1";
 	$master_note = (string)db_result00($sql);
 	}
@@ -63,7 +65,7 @@ $sql = "UPDATE ".PREF."users
 		master_note='$master_note',
 		go_royal_wedding=$go_royal_wedding
 
-	WHERE email='$email'
+	WHERE id=$userid
 	LIMIT 1";
 query($sql);
 

@@ -25,4 +25,6 @@ mb_internal_encoding("utf-8");
 
 require file_exists("vendor/autoload.php") ? "vendor/autoload.php" : "../vendor/autoload.php";
 
+srand(microtime(true) * 1000);
+
 ?>
