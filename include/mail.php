@@ -1,29 +1,26 @@
 <?php
 if(!defined("INCMS")) die();
 
-function mail_init($content="text/html", $charset="utf-8"){
-	$host = $_SERVER["HTTP_HOST"];
-	$from = "no-reply@{$host}";
-	ini_set("SMTP", "mail." . $host);
-	ini_set("sendmail_from", $from);
+function send_mail($email, $subject, $text){
+	$SPApiProxy = new SendpulseApi(SENDPULSE_API_USER_ID, SENDPULSE_API_SECRET, "session");
 
-	$header = "From: Youkon-2016 <{$from}>\r\n";
-	$header.= "Content-Type: $content; charset=$charset\r\n";
+	$email = [
+	  'html'    => $text,
+	  'text'    => strip_tags($text),
+	  'subject' => $subject,
+	  'from'    => [
+	    'name'  => SENDPULSE_FROM_NAME,
+	    'email' => SENDPULSE_FROM_EMAIL,
+	  ],
+	  'to'      => [
+	    [
+	      'name'  => $email,
+	      'email' => $email,
+	    ],
+	  ],
+	];
 
-	return $header;
-	}
-
-function send_mail($email, $subject, $text, $headers=""){
-	if(!$headers)
-		$headers = MAILHEADERS;
-	$subject = '=?utf-8?B?' . base64_encode($subject) . '?=';
-	$text = $text;
-	return mail($email, $subject, $text, $headers);
-	}
-
-function send_mails_via_bcc($emails, $subject, $text){
-	$headers = MAILHEADERS . "Bcc: " . implode(",", $emails) . "\r\n";
-	return send_mail("", $subject, $text, $headers);
+	return $SPApiProxy->smtpSendMail($email)->result;
 	}
 
 function send_mail_to_all($emails, $subject, $text){
@@ -73,70 +70,6 @@ function send_mail_by_userid($userid, $subject, $text){
 		return;
 	$emails = fetch_row($result);
 	return send_mail_to_first($emails, $subject, $text);
-	}
-
-function xmail_helper($email, $subject, $text, $un, $attachment){
-	$utd = UTD;
-	$subject = '=?utf-8?B?' . base64_encode($subject) . '?=';
-
-	$head = <<<EOT
-From: $utd <admin@{$_SERVER["SERVER_NAME"]}>
-To: $email
-Mime-Version: 1.0
-Content-Type:multipart/mixed; boundary="$un"
-
-
-EOT;
-
-	$zag = <<<EOT
---$un
-Content-Type:text/html; charset=utf-8
-Content-Transfer-Encoding: 8bit
-
-
-$text
-
-EOT;
-
-	$zag.= $attachment;
-	return mail($email, $subject, $zag, $head);
-	}
-
-function mail_get_attach($un, $filename, $contents){
-	$zag = "";
-	$basename = basename($filename);
-	$zag.= <<<EOT
---$un
-Content-Type: application/octet-stream; name="$basename"
-Content-Transfer-Encoding:base64
-Content-Disposition:attachment; filename="$basename"
-
-
-EOT;
-	$zag.= chunk_split(base64_encode($contents)) . "\n";
-	return $zag;
-	}
-
-function xmail($email, $subject, $text, $filenames){
-	$zag = "";
-	$un  = "----------".strtoupper(uniqid(time()));
-	if(is_scalar($filenames))
-		$filenames = [$filenames];
-
-	foreach($filenames as $filename){
-		$zag.= mail_get_attach($un, $filename, file_get_contents($filename));
-		}
-	return xmail_helper($email, $subject, $text, $un, $zag);
-	}
-
-function xmail_invoices($email, $subject, $text, $invoices){
-	$zag = "";
-	$un  = "----------".strtoupper(uniqid(time()));
-
-	foreach($invoices as $invoiceid){
-		$zag.= mail_get_attach($un, "invoice$invoiceid.xls", getinvoice("order", $invoiceid));
-		}
-	return xmail_helper($email, $subject, $text, $un, $zag);
 	}
 
 ?>
