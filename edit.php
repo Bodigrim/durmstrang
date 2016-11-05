@@ -49,12 +49,16 @@ $sql = "SELECT DiSTINCT u.city
 $result = query($sql);
 $citySuggestions = fetch_column($result);
 
+$availableRooms = $langRooms;
+unset($availableRooms["standard"]);
+
 $render_data = $userData + [
 	"justUpdated"      => (bool)$justUpdated,
 	"isAdmin"          => (bool)isAdmin($editorid),
 	"photo"            => file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "",
 	"defaultGroupName" => randomDefaultGroupName(),
 	"rooms"            => $langRooms,
+	"roomsAvailable"   => $availableRooms,
 	"groups"           => $groups,
 	"citySuggestions"  => $citySuggestions,
   ];

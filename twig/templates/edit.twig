@@ -107,10 +107,17 @@
     </div>
 
     <div class="form-group">
-      <label for="room">Формат поселения</label>
-      <select class="form-control" name="room" required>
-        {% include "select.twig" with {all: rooms, selected: room} %}
-      </select>
+      {% if payment_room %}
+        <b>
+          Формат поселения:
+          {{ rooms[room] }}
+        </b>
+      {% else %}
+        <label for="room">Формат поселения</label>
+        <select class="form-control" name="room" required>
+          {% include "select.twig" with {all: roomsAvailable, selected: room} %}
+        </select>
+      {% endif %}
     </div>
 
     <div class="form-group">
