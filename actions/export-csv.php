@@ -17,7 +17,6 @@ $hiddenFields =
   , "activecode"
   , "added"
   , "is_admin"
-  , "photo_src"
   , "updated"
   , "unread"
   , "quenta"
@@ -36,6 +35,7 @@ while($row = fetch_assoc($result)){
   foreach($hiddenFields as $hiddenField){
     unset($row[$hiddenField]);
   }
+  $row["photo_src"] = "http://reg.youkon.com.ua/photos/" . photoFileName($row["email"]) . ".jpg";
 	fputcsv($out, $row);
 	}
 
