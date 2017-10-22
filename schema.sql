@@ -1,6 +1,6 @@
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `youkon_sessions` (
+CREATE TABLE `hogwarts_sessions` (
   `name` tinytext NOT NULL,
   `userid` int(10) unsigned NOT NULL,
   `pwhash` tinytext NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE `youkon_sessions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `youkon_users` (
+CREATE TABLE `hogwarts_users` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `email` tinytext NOT NULL,
   `pwhash` tinytext NOT NULL,
@@ -49,15 +49,15 @@ CREATE TABLE `youkon_users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `youkon_config` (
+CREATE TABLE `hogwarts_config` (
   `key` tinytext NOT NULL,
   `value` text NOT NULL,
-  UNIQUE KEY `key` (`key`(255))
+  UNIQUE KEY `key` (`key`(32))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `youkon_messages` (
+CREATE TABLE `hogwarts_messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `userid` int(10) unsigned NOT NULL,
   `authorid` int(10) unsigned NOT NULL,
