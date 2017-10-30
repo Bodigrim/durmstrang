@@ -173,7 +173,7 @@ function remindPassword($userid){
 function sendMailAfterUserRegistration($userid){
 	$renderData = (new UserRenderData($userid))->toArray();
 
-	$userSubject = "Ты зарегистрировался на VII фестиваль Юкон-2016";
+	$userSubject = "Ты зарегистрировался на РИ «Хогвартс. Наследие. 1975»";
 	$userText = constructTwig()->render("mails/user-registration.twig", $renderData);
 	send_mail_by_userid($userid, $userSubject, $userText);
 	}
@@ -310,70 +310,5 @@ function multspell($n, $form1, $form2, $form3){
   	? $form3
   	: ($n % 10 == 1 ? $form1 : $form2);
   }
-
-function randomDefaultGroupName(){
-	$first =
-		[ "Артистичный"
-		, "Большой"
-		, "Вольный"
-		, "Грозный"
-		, "Дикий"
-		, "Ездовой"
-		, "Жизнерадостный"
-		, "Злой"
-		, "Игривый"
-		, "Колючий"
-		, "Лунный"
-		, "Маленький"
-		, "Несгибаемый"
-		, "Огнегривый"
-		, "Певучий"
-		, "Разъярённый"
-		, "Степной"
-		, "Торопливый"
-		, "Ужасный"
-		, "Фыркающий"
-		, "Хороший"
-		, "Цепкий"
-		, "Чёрный"
-		, "Шипящий"
-		, "Этот"
-		, "Юный"
-		, "Яркий"
-		];
-
-	$second =
-		[ "Ангел"
-		, "Бурундук"
-		, "Вепрь"
-		, "Голубь"
-		, "Дуб"
-		, "Ёж"
-		, "Журавль"
-		, "Зубр"
-		, "Йогурт"
-		, "Крот"
-		, "Лис"
-		, "Мамонт"
-		, "Носорог"
-		, "Олень"
-		, "Пеликан"
-		, "Рак"
-		, "Страус"
-		, "Трус"
-		, "Упырь"
-		, "Филин"
-		, "Хомяк"
-		, "Царь"
-		, "Червяк"
-		, "Щавель"
-		, "Эмо"
-		, "Юпитер"
-		, "Якорь"
-		];
-
-	$ret = $first[rand() % count($first)] . " " . $second[rand() % count($second)];
-	return $ret;
-}
 
 ?>

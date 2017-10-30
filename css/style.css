@@ -5,3 +5,7 @@ footer {
 .photo-main {
   max-height: 50vh;
 }
+
+h1 {
+  font-size: 32px;
+}

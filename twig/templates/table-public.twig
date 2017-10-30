@@ -5,7 +5,7 @@
 
 
   <h2>
-    Список заявок <span class="badge">{{ users | length }}</span>
+    Список заявок
 
     <div class="pull-right">
     {% if isAdmin %}
@@ -33,16 +33,13 @@
     <thead>
       <tr>
         <th>
-          ФИО
+          Игрок
         </th>
         <th>
-          Ник
+          Персонаж
         </th>
         <th>
-          Город
-        </th>
-        <th>
-          Группа поселения
+          Блок
         </th>
         <th>
           Статус
@@ -52,16 +49,47 @@
     {% for user in users %}
       <tr>
         <td>
-          {{ user.name }}
+          {% if user.publicity == "full" %}
+            {{ user.name }}
+            {{ user.surname }}
+            {% if user.nick %}
+              ({{ user.nick}})
+            {% endif %}
+            {% if user.facebook %}
+              &nbsp;
+              <a href="{{ user.facebook }}">FB</a>
+            {% endif %}
+            {% if user.telegram %}
+              &nbsp;
+              <a href="http://t.me/{{ user.telegram | slice(1) }}">TG</a>
+            {% endif %}
+          {% elseif user.publicity == "no-facebook" %}
+            {{ user.name }}
+            {{ user.surname }}
+            {% if user.nick %}
+              ({{ user.nick }})
+            {% endif %}
+          {% elseif user.publicity == "nick-and-facebook" %}
+            {{ user.nick }}
+            {% if user.facebook %}
+              &nbsp;
+              <a href="{{ user.facebook }}">FB</a>
+            {% endif %}
+            {% if user.telegram %}
+              &nbsp;
+              <a href="http://t.me/{{ user.telegram | slice(1) }}">TG</a>
+            {% endif %}
+          {% elseif user.publicity == "nick-only" %}
+            {{ user.nick }}
+          {% else %}
+            Роль занята
+          {% endif %}
         </td>
         <td>
-          {{ user.nick }}
+          {{ user.character_name }}
         </td>
         <td>
-          {{ user.city }}
-        </td>
-        <td>
-          {{ user.groupName }}
+          {{ blocks[user.block] }}
         </td>
         <td>
           {{ statuses[user.status] }}

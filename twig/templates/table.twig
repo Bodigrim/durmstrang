@@ -22,28 +22,22 @@
           #
         </th>
         <th>
-          ФИО
+          Имя игрока
         </th>
         <th>
           Ник
         </th>
         <th>
-          Город
+          Имя персонажа
         </th>
         <th>
-          Группа поселения
+          Блок
         </th>
         <th>
-          Взнос
+          Статус крови
         </th>
         <th>
-          Питание
-        </th>
-        <th>
-          Комната
-        </th>
-        <th>
-          Статус
+          Статус заявки
         </th>
       </tr>
     </thead>
@@ -64,28 +58,30 @@
         <td>
           {% if user.name %}
             {{ user.name }}
+            {{ user.surname }}
           {% else %}
             {{ user.email }}
+          {% endif %}
+          {% if user.facebook %}
+            &nbsp;
+            <a href="{{ user.facebook }}">FB</a>
+          {% endif %}
+          {% if user.telegram %}
+            &nbsp;
+            <a href="http://t.me/{{ user.telegram | slice(1) }}">TG</a>
           {% endif %}
         </td>
         <td>
           {{ user.nick }}
         </td>
         <td>
-          {{ user.city }}
+          {{ user.character_name }}
         </td>
         <td>
-          {{ user.groupName }}
+          {{ blocks[user.block] }}
         </td>
-        <td data-value="{{ user.payment }}" {% if not user.payment %} class="bg-danger" {% endif %}>
-          <input type="checkbox" class="payment-checkbox" data-email="{{ user.email }}" {% if user.payment %} checked {% endif %}>
-        </td>
-        <td data-value="{{ user.payment_food }}" {% if not user.payment_food %} class="bg-danger" {% endif %}>
-          <input type="checkbox" class="payment-food-checkbox" data-email="{{ user.email }}" {% if user.payment_food %} checked {% endif %}>
-        </td>
-        <td data-value="{{ user.payment_room }}" {% if not user.payment_room %} class="bg-danger" {% endif %}>
-          <input type="checkbox" class="payment-room-checkbox" data-email="{{ user.email }}" {% if user.payment_room %} checked {% endif %}>
-          {{ rooms[user.room] }}
+        <td>
+          {{ bloods[user.blood] }}
         </td>
         <td data-value="{{ ordStatuses[user.status] }}">
           <select class="status-selector" data-email="{{ user.email }}">

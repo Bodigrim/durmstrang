@@ -6,10 +6,9 @@ $editorid = loginbycookie();
 if(isAdmin($editorid))
   redirect("/table.php");
 
-$sql = "SELECT u.*, g.group_name as groupName
+$sql = "SELECT u.*
   FROM ".PREF."users AS u
-  LEFT JOIN ".PREF."users AS g ON u.group_id=g.id
-  WHERE u.active=1 AND u.name<>''
+  WHERE u.active=1 AND u.name<>'' AND u.publicity<>'nothing'
   ORDER BY u.name ASC";
 $result = query($sql);
 $userData = fetch_assocs($result);
@@ -18,6 +17,7 @@ $render_data = [
 	"users"       => $userData,
 	"statuses"    => $langStatuses,
 	"ordStatuses" => $ordStatuses,
+  "blocks"      => $langBlocks,
 	"isAdmin"     => (bool)isAdmin($editorid),
 	"isLoggedIn"  => (bool)$editorid,
   ];

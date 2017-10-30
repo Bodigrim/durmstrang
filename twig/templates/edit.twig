@@ -42,96 +42,152 @@
   <form action="/actions/update.php" method="post" id="edit" enctype="multipart/form-data">
     <input type="hidden" name="email" id="email" value="{{ email }}" />
 
-    {% if isAdmin %}
-      <div class="form-group">
-        <label for="name">E-mail</label>
-        <input type="text" class="form-control" id="name" disabled value="{{ email }}" />
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#gamer" aria-controls="gamer" role="tab" data-toggle="tab">Игрок</a></li>
+      <li role="presentation"><a href="#character" aria-controls="character" role="tab" data-toggle="tab">Персонаж</a></li>
+      <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Переписка</a></li>
+    </ul>
+
+    <div class="tab-content">
+      <div role="tabpanel" class="tab-pane active" id="gamer">
+
+        {% if isAdmin %}
+          <div class="form-group">
+            <label for="name">E-mail</label>
+            <input type="text" class="form-control" id="name" disabled value="{{ email }}" />
+          </div>
+        {% endif %}
+
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input type="text" class="form-control" id="name" placeholder="Иван" name="name" value="{{ name }}" required />
+        </div>
+
+        <div class="form-group">
+          <label for="surname">Фамилия</label>
+          <input type="text" class="form-control" id="surname" placeholder="Иванов" name="surname" value="{{ surname }}" required />
+        </div>
+
+        <div class="form-group">
+          <label for="nick">Ник или прозвище</label>
+          <input type="text" class="form-control" id="nick" placeholder="Если нет — оставьте поле пустым" name="nick" value="{{ nick }}" />
+        </div>
+
+        <div class="form-group">
+          <label for="age">Дата рождения</label>
+          <input type="date" class="form-control" id="age" placeholder="1990-12-31" name="age" value="{{ age }}" pattern="\d\d\d\d-\d\d-\d\d" title="В формате ГГГГ-ММ-ДД" required />
+        </div>
+
+        <div class="form-group">
+          <label for="contacts">Телефон</label>
+          <input type="tel" class="form-control" id="contacts" placeholder="+38 (090) 898-79-78" name="contacts" value="{{ contacts }}" required />
+        </div>
+
+        <div class="form-group">
+          <label for="facebook">Профиль в Facebook</label>
+          <input type="text" class="form-control" id="facebook" placeholder="https://www.facebook.com/..." name="facebook" value="{{ facebook }}" />
+        </div>
+
+        <div class="form-group">
+          <label for="telegram">Профиль в Telegram</label>
+          <input type="text" class="form-control" id="telegram" placeholder="@Username" name="telegram" value="{{ telegram }}" pattern="@\w{5,}" />
+        </div>
+
+        <div class="form-group">
+          <label for="publicity">Как вас указать в сетке ролей?</label>
+          {% include "radios.twig" with {all: publicities, selected: publicity, name: "publicity"} %}
+        </div>
+
+        <div class="form-group">
+          <label for="contraindication">Медицинские противопоказания и хронические заболевания</label>
+          <textarea class="form-control" rows="3" id="contraindication" name="contraindication" placeholder="Если отсутствуют — оставьте поле пустым">{{ contraindication }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="photo">Добавить фото (JPEG, PNG или GIF). На фото должно быть хорошо видно ваше лицо. </label>
+          <input type="file" id="photo" name="photo">
+        </div>
+
+        <div class="pull-right">
+          <a class="btn btn-danger btn-xs" data-email="{{ email }}" id="delete-btn">Удалить заявку</a>
+        </div>
+
       </div>
-    {% endif %}
+      <div role="tabpanel" class="tab-pane" id="character">
 
-    <div class="form-group">
-      <label for="name">Фамилия и имя</label>
-      <input type="text" class="form-control" id="name" placeholder="Иванов Иван" name="name" value="{{ name }}" required />
-    </div>
+        <div class="form-group">
+          <label for="character_name">Имя и фамилия</label>
+          <input type="text" class="form-control" id="character_name" placeholder="Леголас" name="character_name" value="{{ character_name }}" />
+        </div>
 
-    <div class="form-group">
-      <label for="nick">Ник или прозвище</label>
-      <input type="text" class="form-control" id="nick" placeholder="Если нет — оставьте поле пустым" name="nick" value="{{ nick }}" />
-    </div>
-
-    <div class="form-group">
-      <label for="age">Дата рождения</label>
-      <input type="date" class="form-control" id="age" placeholder="1990-12-31" name="age" value="{{ age }}" pattern="\d\d\d\d-\d\d-\d\d" title="В формате ГГГГ-ММ-ДД" required />
-    </div>
-
-    <div class="form-group">
-      <label for="contacts">Телефон</label>
-      <input type="tel" class="form-control" id="contacts" placeholder="+12 (090) 898-79-78" name="contacts" value="{{ contacts }}" required />
-    </div>
-
-    <div class="form-group">
-      <label for="city">Город проживания</label>
-      <input type="text" class="form-control" id="city" placeholder="" name="city" value="{{ city }}" required list="citySuggestions" />
-    </div>
-
-    <datalist id="citySuggestions">
-      {% for citySuggestion in citySuggestions %}
-        <option value="{{ citySuggestion }}" />
-      {% endfor %}
-    </datalist>
-
-    <div class="form-group">
-      <label>Поселение</label>
-      <div class="radio">
-        <label>
-          <input type="radio" id="settlement-self" name="settlement" value="self" {% if not group_owner and not group_id %}checked{% endif %} />
-          Самостоятельно
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" id="settlement-owner" name="settlement" value="owner" {% if group_owner %}checked{% endif %} />
-          Я старший группы
-          <input type="text" class="form-control" id="group-name" placeholder="{{ defaultGroupName }}" name="group_name" value="{{ group_name }}" {% if not group_owner %}disabled{% endif %} />
-        </label>
-      </div>
-      <div class="radio">
-        <label>
-          <input type="radio" id="settlement-member" name="settlement" value="member" {% if not group_owner and group_id %}checked{% endif %} />
-          Я член группы
-          <select class="form-control" id="group-id" name="group_id" {% if not (not group_owner and group_id) %}disabled{% endif %} />
-            {% include "select.twig" with {all: groups, selected: group_id} %}
+        <div class="form-group">
+          <label for="block">Игровой блок (публичный)</label>
+          <select class="form-control" name="block">
+            {% include "select.twig" with {all: blocks, selected: block} %}
           </select>
-        </label>
+        </div>
+
+        <div class="form-group">
+          <label for="character_age">Дата рождения</label>
+          <input type="date" class="form-control" id="character_age" placeholder="1990-12-31" name="character_age" value="{{ character_age }}" pattern="\d\d\d\d-\d\d-\d\d" title="В формате ГГГГ-ММ-ДД" />
+        </div>
+
+        <div class="form-group">
+          <label for="blood">Статус крови</label>
+          {% include "radios.twig" with {all: bloods, selected: blood, name: "blood"} %}
+        </div>
+
+        <div class="form-group">
+          <label for="quenta">Биография</label>
+          <textarea class="form-control" rows="9" id="quenta" name="quenta" placeholder="Я шотландский дроу-ассасин, родился сиротой...">{{ quenta }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="fear">Что вызывает у персонажа страх? Минимум три вещи</label>
+          <input type="text" class="form-control" id="fear" placeholder="Кино, вино и домино" name="fear" value="{{ fear }}" />
+        </div>
+
+        <div class="form-group">
+          <label for="possesions">Игровые предметы и существа (зелья, артефакты, магические животные и т. п.)</label>
+          <input type="text" class="form-control" id="possesions" placeholder="Если отсутствуют — оставьте поле пустым" name="possesions" value="{{ possesions }}" />
+        </div>
+
+        <div class="form-group">
+          <label for="wish">Во что вы хотите поиграть?</label>
+          <textarea class="form-control" rows="3" id="wish" name="wish" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ wish }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="antiwish">Во что вы категорически не хотите играть?</label>
+          <textarea class="form-control" rows="3" id="antiwish" name="antiwish" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ antiwish }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="addendum">Дополнительные пожелания</label>
+          <textarea class="form-control" rows="3" id="addendum" name="addendum" placeholder="Если отсутствуют — оставьте поле пустым">{{ addendum }}</textarea>
+        </div>
+
       </div>
-    </div>
+      <div role="tabpanel" class="tab-pane" id="messages">
+        <br />
+        <div id="messages">
+          {% for message in messages %}
+            <b>
+              {{ message.name }}:
+            </b>
+            <br />
+            {{ message.message | nl2br }}
+            <hr />
+          {% endfor %}
+        </div>
 
-    <div class="form-group">
-      {% if payment_room %}
-        <b>
-          Формат поселения:
-          {{ rooms[room] }}
-        </b>
-      {% else %}
-        <label for="room">Формат поселения</label>
-        <select class="form-control" name="room" required>
-          {% include "select.twig" with {all: roomsAvailable, selected: room} %}
-        </select>
-      {% endif %}
-    </div>
+        <textarea class="form-control" rows="3" id="message" placeholder="Ваше сообщение"></textarea>
+        <button class="btn btn-default" id="send-message">Отправить</button>
+        <br />
+        <br />
+        <br />
 
-    <div class="form-group">
-      <label for="contraindication">Медицинские противопоказания и хронические заболевания</label>
-      <textarea class="form-control" rows="3" id="contraindication" name="contraindication" placeholder="Если отсутствуют — оставьте поле пустым">{{ contraindication }}</textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="photo">Добавить фото (JPEG, PNG или GIF). На фото должно быть хорошо видно ваше лицо. </label>
-      <input type="file" id="photo" name="photo">
-    </div>
-
-    <div class="pull-right">
-      <a class="btn btn-danger btn-xs" data-email="{{ email }}" id="delete-btn">Удалить заявку</a>
+      </div>
     </div>
 
     <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>

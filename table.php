@@ -4,7 +4,7 @@ include "include/config.php";
 
 $editorid = loginbycookie();
 if(!isAdmin($editorid))
-	die("У вас недостаточно прав доступа, чтобы просматривать список заявок. ");
+	die("У вас недостаточно прав доступа, чтобы просматривать список заявок. Вернитесь на <a href=\"/\">главную страницу</a>.");
 
 $sql = "SELECT u.*, g.group_name as groupName
 	FROM ".PREF."users AS u
@@ -18,7 +18,8 @@ $render_data = [
 	"users"       => $userData,
 	"statuses"    => $langStatuses,
 	"ordStatuses" => $ordStatuses,
-  "rooms"       => $langRooms,
+  "blocks"      => $langBlocks,
+  "bloods"      => $langBloods,
   ];
 
 $ret = constructTwig()->render("table.twig", $render_data);

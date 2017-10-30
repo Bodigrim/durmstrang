@@ -43,27 +43,15 @@ function convOptions2Html($options, $old, $withempty){
 	}
 
 $langStatuses = [
-  'query'               => "На рассмотрении",
-  'participant'         => "Участник",
-  'participant_no_room' => "Участник без поселения",
-  'special_guest'       => "Почетный гость",
-  'committee'           => "Оргкомитет",
+  'query'               => "Предварительная заявка",
+  'participant'         => "Полная заявка",
   'rejected'            => "Заявка отклонена",
 	];
 
 $ordStatuses = [
   'query'               => 0,
   'participant'         => 1,
-  'participant_no_room' => 2,
-  'special_guest'       => 3,
-  'committee'           => 4,
-  'rejected'            => 5,
-	];
-
-$langPublicities = [
-	"name" => "Фамилию и имя",
-	"nick" => "Ник",
-	"null" => "Укажите просто «роль занята»",
+  'rejected'            => 2,
 	];
 
 $langCountries = [
@@ -123,11 +111,31 @@ $langYesNo = [
 	1 => "Да",
 	];
 
-$langRooms = [
-  "no-room"  => "Без поселения",
-  "econom"   => "Эконом (180 грн.)",
-  "standard" => "Стандарт (350 грн.)",
-  "halflux"  => "Полулюкс (440 грн.)",
+$langPublicities = [
+  "full"              => "ФИО, ник и соцсети",
+  "no-facebook"       => "ФИО и ник",
+  "nick-and-facebook" => "Ник и соцсети",
+  "nick-only"         => "Только ник",
+  "occupied"          => "Только «Роль занята»",
+  "nothing"           => "Не указывать"
+  ];
+
+$langBloods = [
+  "pureblood" => "Чистокровный",
+  "halfblood" => "Полукровка",
+  "mudblood"  => "Магглорожденный",
+  ];
+
+$langBlocks = [
+  "teachers"     => "Сотрудники Хогвартса",
+  "gryffindor"   => "Студенты Гриффиндора",
+  "slytherin"    => "Студенты Слизерина",
+  "ravenclaw"    => "Студенты Рейвенкло",
+  "hufflepuff"   => "Студенты Хаффлпаффа",
+  "hogsmeade"    => "Жители Хогсмида",
+  "hogsmeade2"   => "Гости Хогсмида",
+  "ministry"     => "Министерство Магии",
+  "aurors"       => "Аврорат",
   ];
 
 ?>

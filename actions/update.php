@@ -16,10 +16,11 @@ function sendMailGroupRegistration($userid, $groupid, $groupName){
 	send_mail_to_admin($adminSubject, $adminText);
 }
 
-function sendMailUserRegistration($userMail, $userName){
+function sendMailUserRegistration($userMail, $userName, $userSurname){
 	$renderData =
-		[ "userMail" => $userMail
-		, "userName" => $userName
+		[ "userMail"    => $userMail
+		, "userName"    => $userName
+		, "userSurname" => $userSurname
 		];
 
 	$adminSubject = "Зарегистрирован новый пользователь";
@@ -71,83 +72,58 @@ if(!canEdit($editorid, $email))
 $userid = emailToId($email);
 
 $name             = $post_get->getvar("name");
+$surname          = $post_get->getvar("surname");
 $nick             = $post_get->getvar("nick");
-$city             = $post_get->getvar("city");
 $age              = $post_get->getadate("age");
 $contacts         = $post_get->getvar("contacts");
+$facebook         = $post_get->getvar("facebook");
+$telegram         = $post_get->getvar("telegram");
+$publicity        = $post_get->getvar("publicity");
 $contraindication = $post_get->getvar("contraindication");
-$room             = $post_get->getvar("room");
+$character_name   = $post_get->getvar("character_name");
+$character_age    = $post_get->getadate("character_age");
+$blood            = $post_get->getvar("blood");
+$quenta           = $post_get->getvar("quenta");
+$fear             = $post_get->getvar("fear");
+$possesions       = $post_get->getvar("possesions");
+$addendum         = $post_get->getvar("addendum");
+$block            = $post_get->getvar("block");
+$wish             = $post_get->getvar("wish");
+$antiwish         = $post_get->getvar("antiwish");
 
-$sql = "SELECT u.name, u.group_owner, u.group_name, u.group_id
+$sql = "SELECT u.name
 	FROM ".PREF."users AS u
 	WHERE id = $userid
 	LIMIT 1";
 $result = query($sql);
-list($oldName, $oldGroupOwner, $oldGroupName, $oldGroupId) = fetch_row($result);
-
-$settlement = $post_get->getvar("settlement", "self|owner|member", "self");
-switch($settlement){
-	case "self":
-		$groupOwner = 0;
-		$groupName = "";
-		$groupId = 0;
-
-		if($oldGroupId != $groupId){
-			sendMailGroupMemberLeft($userid, $email, $name, $oldGroupId);
-		}
-
-		break;
-	case "owner":
-		$groupOwner = 1;
-		$groupName = $post_get->getvar("group_name");
-		if(!$groupName){
-			$groupName = randomDefaultGroupName();
-		}
-		$groupId = $userid;
-
-		if($oldGroupId != $groupId){
-			sendMailGroupRegistration($userid, $groupId, $groupName);
-		}
-
-		break;
-	case "member":
-		$groupOwner = 0;
-		$groupName = "";
-		$groupId = $post_get->getint("group_id", 0);
-
-		if($oldGroupId != $groupId){
-			sendMailGroupMemberChange($userid, $email, $name, $oldGroupId, $groupId);
-		}
-
-		break;
-	default:
-		throw new Exception("update: unexpected value of settlement " . $settlement);
-}
+list($oldName) = fetch_row($result);
 
 $sql = "UPDATE ".PREF."users
 	SET name = '$name'
+	  , surname = '$surname'
 		, nick = '$nick'
-		, city = '$city'
 		, age = '$age'
 		, contacts = '$contacts'
+		, facebook = '$facebook'
+		, telegram = '$telegram'
+		, publicity = '$publicity'
 		, contraindication = '$contraindication'
-		, room = IF(payment_room, room, '$room')
-		, group_owner = $groupOwner
-		, group_name = '$groupName'
-		, group_id = $groupId
+		, character_name = '$character_name'
+		, character_age = '$character_age'
+		, blood = '$blood'
+		, quenta = '$quenta'
+		, fear = '$fear'
+		, possesions = '$possesions'
+		, addendum = '$addendum'
+		, block = '$block'
+		, wish = '$wish'
+		, antiwish = '$antiwish'
 
 	WHERE id = $userid
 	LIMIT 1";
 query($sql);
 
 $updated = (bool)affected_rows();
-
-if(!$groupOwner){
-	$sql = "UPDATE ".PREF."users
-		SET group_id = 0
-		WHERE group_id = $userid";
-	query($sql);
-}
 
 if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 	$options = new FileUploadOptions();
@@ -180,7 +156,7 @@ if($updated){
 	}
 
 if($oldName != $name){
-	sendMailUserRegistration($email, $name);
+	sendMailUserRegistration($email, $name, $surname);
 }
 
 redirect(isAdmin($editorid) ? "/table.php#{$email}" : "/edit.php?" . http_build_query(["email" => idToEmail($editorid), "justUpdated" => true]));

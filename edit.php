@@ -7,11 +7,11 @@ $email    = $post_get->getemail("email");
 $justUpdated = $post_get->getvar("justUpdated");
 
 if(!$email)
-	die("Редактирование заявки невозможно: введите корректный e-mail. ");
+	die("Редактирование заявки невозможно: введите корректный e-mail.  Вернитесь на <a href=\"/\">главную страницу</a>.");
 
 $editorid = loginbycookie();
 if(!canEdit($editorid, $email))
-	die("У вас недостаточно прав доступа, чтобы редактировать заявку {$email}. ");
+	die("У вас недостаточно прав доступа, чтобы редактировать заявку {$email}. Вернитесь на <a href=\"/\">главную страницу</a>.");
 
 $sql = "SELECT *
 	FROM ".PREF."users
@@ -36,31 +36,14 @@ $sql = "SELECT m.id, u.name, m.message
 $result = query($sql);
 $messages = fetch_assocs($result);
 
-$sql = "SELECT u.id, u.group_name
-	FROM ".PREF."users AS u
-	WHERE u.active=1 AND u.group_owner=1 AND u.group_name<>'' AND u.id<>$userid
-	ORDER BY u.group_name";
-$result = query($sql);
-$groups = fetch_rows($result, 1, true);
-
-$sql = "SELECT DiSTINCT u.city
-	FROM ".PREF."users AS u
-	ORDER BY u.city";
-$result = query($sql);
-$citySuggestions = fetch_column($result);
-
-$availableRooms = $langRooms;
-unset($availableRooms["standard"]);
-
 $render_data = $userData + [
 	"justUpdated"      => (bool)$justUpdated,
 	"isAdmin"          => (bool)isAdmin($editorid),
 	"photo"            => file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "",
-	"defaultGroupName" => randomDefaultGroupName(),
-	"rooms"            => $langRooms,
-	"roomsAvailable"   => $availableRooms,
-	"groups"           => $groups,
-	"citySuggestions"  => $citySuggestions,
+	"publicities"      => $langPublicities,
+	"bloods"           => $langBloods,
+	"blocks"           => $langBlocks,
+	"messages"         => $messages,
   ];
 
 $ret = constructTwig()->render("edit.twig", $render_data);
