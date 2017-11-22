@@ -9,7 +9,7 @@ if(isAdmin($editorid))
 $sql = "SELECT u.*
   FROM ".PREF."users AS u
   WHERE u.active=1 AND u.name<>'' AND u.publicity<>'nothing'
-  ORDER BY u.name ASC";
+  ORDER BY u.id DESC";
 $result = query($sql);
 $userData = fetch_assocs($result);
 

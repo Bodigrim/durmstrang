@@ -4,6 +4,7 @@ footer {
 
 .photo-main {
   max-height: 50vh;
+  image-orientation: from-image;
 }
 
 h1 {

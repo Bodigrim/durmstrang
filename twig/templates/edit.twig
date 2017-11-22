@@ -3,7 +3,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 
   <h2>
     Заявка
@@ -85,12 +85,12 @@
 
         <div class="form-group">
           <label for="facebook">Профиль в Facebook</label>
-          <input type="text" class="form-control" id="facebook" placeholder="https://www.facebook.com/..." name="facebook" value="{{ facebook }}" />
+          <input type="url" class="form-control" id="facebook" placeholder="https://www.facebook.com/..." name="facebook" value="{{ facebook }}" />
         </div>
 
         <div class="form-group">
           <label for="telegram">Профиль в Telegram</label>
-          <input type="text" class="form-control" id="telegram" placeholder="@Username" name="telegram" value="{{ telegram }}" pattern="@\w{5,}" />
+          <input type="text" class="form-control" id="telegram" placeholder="@Username" name="telegram" value="{{ telegram }}" pattern="@\w{5,}\s*" />
         </div>
 
         <div class="form-group">
@@ -139,12 +139,12 @@
 
         <div class="form-group">
           <label for="quenta">Биография</label>
-          <textarea class="form-control" rows="9" id="quenta" name="quenta" placeholder="Я шотландский дроу-ассасин, родился сиротой...">{{ quenta }}</textarea>
+          <textarea class="form-control" rows="12" id="quenta" name="quenta" placeholder="Я шотландский дроу-ассасин, родился сиротой...">{{ quenta }}</textarea>
         </div>
 
         <div class="form-group">
           <label for="fear">Что вызывает у персонажа страх? Минимум три вещи</label>
-          <input type="text" class="form-control" id="fear" placeholder="Кино, вино и домино" name="fear" value="{{ fear }}" />
+          <textarea class="form-control" rows="4" id="fear" name="fear" placeholder="Кино, вино и домино">{{ fear }}</textarea>
         </div>
 
         <div class="form-group">
@@ -154,17 +154,17 @@
 
         <div class="form-group">
           <label for="wish">Во что вы хотите поиграть?</label>
-          <textarea class="form-control" rows="3" id="wish" name="wish" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ wish }}</textarea>
+          <textarea class="form-control" rows="4" id="wish" name="wish" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ wish }}</textarea>
         </div>
 
         <div class="form-group">
           <label for="antiwish">Во что вы категорически не хотите играть?</label>
-          <textarea class="form-control" rows="3" id="antiwish" name="antiwish" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ antiwish }}</textarea>
+          <textarea class="form-control" rows="4" id="antiwish" name="antiwish" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ antiwish }}</textarea>
         </div>
 
         <div class="form-group">
           <label for="addendum">Дополнительные пожелания</label>
-          <textarea class="form-control" rows="3" id="addendum" name="addendum" placeholder="Если отсутствуют — оставьте поле пустым">{{ addendum }}</textarea>
+          <textarea class="form-control" rows="4" id="addendum" name="addendum" placeholder="Если отсутствуют — оставьте поле пустым">{{ addendum }}</textarea>
         </div>
 
       </div>
