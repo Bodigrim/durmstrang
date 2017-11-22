@@ -2,9 +2,10 @@
 
 include "include/config.php";
 
-$post_get = new GetVarClass("_GET");
-$email    = $post_get->getemail("email");
+$post_get    = new GetVarClass("_GET");
+$email       = $post_get->getemail("email");
 $justUpdated = $post_get->getvar("justUpdated");
+$print       = $post_get->getvar("print");
 
 if(!$email)
 	die("Редактирование заявки невозможно: введите корректный e-mail.  Вернитесь на <a href=\"/\">главную страницу</a>.");
@@ -46,7 +47,9 @@ $render_data = $userData + [
 	"messages"         => $messages,
   ];
 
-$ret = constructTwig()->render("edit.twig", $render_data);
+$template = $print ? "print.twig" : "edit.twig";
+
+$ret = constructTwig()->render($template, $render_data);
 
 echo $ret;
 

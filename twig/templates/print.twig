@@ -1,0 +1,137 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+
+  <h3>
+    {{ character_name }}
+    <br />
+    {{ name }} {{ surname }}
+    {% if nick %}
+      ({{ nick }})
+    {% endif  %}
+  </h3>
+
+  <dl class="dl-horizontal">
+    <dt>
+      E-mail
+    </dt>
+    <dd>
+      {{ email }}
+    </dd>
+
+    <dt>
+      Дата рождения
+    </dt>
+    <dd>
+      {{ age }}
+    </dd>
+
+    <dt>
+      Телефон
+    </dt>
+    <dd>
+      {{ contacts }}
+    </dd>
+
+    <dt>
+      Facebook
+    </dt>
+    <dd>
+      {{ facebook }}
+    </dd>
+
+    <dt>
+      Telegram
+    </dt>
+    <dd>
+      {{ telegram }}
+    </dd>
+
+    <dt>
+      Сетка ролей
+    </dt>
+    <dd>
+      {{ publicities[publicity] }}
+    </dd>
+
+    <dt>
+      Противопоказания
+    </dt>
+    <dd>
+      {{ contraindication | nl2br }}
+    </dd>
+
+    <dt>
+      Игровой блок
+    </dt>
+    <dd>
+      {{ blocks[block] }}
+    </dd>
+
+    <dt>
+      Дата рождения
+    </dt>
+    <dd>
+      {{ character_age }}
+    </dd>
+
+    <dt>
+      Статус крови
+    </dt>
+    <dd>
+      {{ bloods[blood] }}
+    </dd>
+
+    <dt>
+      Биография
+    </dt>
+    <dd>
+      {{ quenta | nl2br }}
+    </dd>
+
+    <dt>
+      Страхи
+    </dt>
+    <dd>
+      {{ fear | nl2br }}
+    </dd>
+
+    <dt>
+      Игровые предметы
+    </dt>
+    <dd>
+      {{ possesions | nl2br }}
+    </dd>
+
+    <dt>
+      Хочет играть
+    </dt>
+    <dd>
+      {{ wish | nl2br }}
+    </dd>
+
+    <dt>
+      Не хочет играть
+    </dt>
+    <dd>
+      {{ antiwish | nl2br }}
+    </dd>
+
+    <dt>
+      Дополнительно
+    </dt>
+    <dd>
+      {{ addendum | nl2br }}
+    </dd>
+
+  </dl>
+
+    </div>
+  </div>
+</div>
+
+{% include "footer.twig" with {additional_js : ["edit.js"]} only %}
+{% endspaceless %}
