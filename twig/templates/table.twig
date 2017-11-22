@@ -7,6 +7,10 @@
   <h2>
     Список заявок
 
+    <span class="form-inline">
+      <input type="search" id="omnibox" class="form-control" placeholder="Поиск..." />
+    </span>
+
     <div class="pull-right">
       <a href="/actions/logout.php" class="btn btn-danger">
         Выйти
@@ -15,7 +19,7 @@
 
   </h2>
 
-  <table class="table table-striped sortable">
+  <table id="users-table" class="table table-striped sortable">
     <thead>
       <tr>
         <th>
