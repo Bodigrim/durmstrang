@@ -1,5 +1,15 @@
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `hogwarts_config` (
+  `key` tinytext NOT NULL,
+  `value` text NOT NULL,
+  UNIQUE KEY `key` (`key`(32))
+);
+CREATE TABLE `hogwarts_messages` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `userid` int(10) unsigned NOT NULL,
+  `authorid` int(10) unsigned NOT NULL,
+  `message` text,
+  PRIMARY KEY (`id`)
+);
 CREATE TABLE `hogwarts_sessions` (
   `name` tinytext NOT NULL,
   `userid` int(10) unsigned NOT NULL,
@@ -11,10 +21,7 @@ CREATE TABLE `hogwarts_sessions` (
   UNIQUE KEY `userid` (`userid`,`name`(32)),
   KEY `valid` (`valid`),
   KEY `name` (`name`(32))
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+);
 CREATE TABLE `hogwarts_users` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `email` tinytext NOT NULL,
@@ -42,26 +49,21 @@ CREATE TABLE `hogwarts_users` (
   `payment` tinyint(3) unsigned DEFAULT '0',
   `payment_room` tinyint(3) unsigned DEFAULT '0',
   `payment_food` tinyint(3) unsigned DEFAULT '0',
+  `surname` tinytext NOT NULL,
+  `facebook` tinytext NOT NULL,
+  `telegram` tinytext NOT NULL,
+  `publicity` tinytext NOT NULL,
+  `character_name` tinytext NOT NULL,
+  `blood` tinytext NOT NULL,
+  `quenta` text NOT NULL,
+  `addendum` text NOT NULL,
+  `possesions` text NOT NULL,
+  `block` tinytext NOT NULL,
+  `character_age` date NOT NULL,
+  `fear` text NOT NULL,
+  `wish` text NOT NULL,
+  `antiwish` text NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `active` (`active`),
   KEY `email` (`email`(20))
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `hogwarts_config` (
-  `key` tinytext NOT NULL,
-  `value` text NOT NULL,
-  UNIQUE KEY `key` (`key`(32))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `hogwarts_messages` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `userid` int(10) unsigned NOT NULL,
-  `authorid` int(10) unsigned NOT NULL,
-  `message` text,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
