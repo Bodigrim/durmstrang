@@ -1,0 +1,33 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>
+          ФИО
+        </th>
+        <th>
+          Противопоказания
+        </th>
+      </tr>
+    </thead>
+    {% for user in users %}
+      <tr>
+        <td>
+          {{ user.surname }}
+          {{ user.name }}
+        </td>
+        <td>
+          {{ user.contraindication }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+</div>
+
+{% include "footer.twig" with {additional_js : ["table.js"]} only %}
+{% endspaceless %}
