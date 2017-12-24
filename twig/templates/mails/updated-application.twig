@@ -1,0 +1,28 @@
+Привет, админ!
+<br />
+<br />Участник <a href="http://hogwarts.bodigr.im/edit.php?email={{ new.email | url_encode }}">{{ new.name }} {{ new.surname }}</a> отредактировал свою заявку.
+<br />
+
+{% include "diff-simple.twig" with {caption: "Имя",              old: old.name, new: new.name } %}
+{% include "diff-simple.twig" with {caption: "Фамилия",          old: old.surname, new: new.surname } %}
+{% include "diff-simple.twig" with {caption: "Ник",              old: old.nick, new: new.nick } %}
+{% include "diff-simple.twig" with {caption: "Дата рождения",    old: old.age, new: new.age } %}
+{% include "diff-simple.twig" with {caption: "Телефон",          old: old.contacts, new: new.contacts } %}
+{% include "diff-simple.twig" with {caption: "Facebook",         old: old.facebook, new: new.facebook } %}
+{% include "diff-simple.twig" with {caption: "Telegram",         old: old.telegram, new: new.telegram } %}
+{% include "diff-simple.twig" with {caption: "Сетка ролей",      old: publicities[old.publicity], new: publicities[new.publicity] } %}
+{% include "diff-complex.twig" with {caption: "Противопоказания", old: old.contraindication, new: new.contraindication, diff: diff.contraindication } %}
+{% include "diff-simple.twig" with {caption: "Игровой блок",     old: blocks[old.block], new: blocks[new.block] } %}
+{% include "diff-simple.twig" with {caption: "Дата рождения",    old: old.character_age, new: new.character_age } %}
+{% include "diff-simple.twig" with {caption: "Статус крови",     old: bloods[old.blood], new: bloods[new.blood] } %}
+{% include "diff-complex.twig" with {caption: "Биография",        old: old.quenta, new: new.quenta, diff: diff.quenta } %}
+{% include "diff-complex.twig" with {caption: "Страхи",           old: old.fear, new: new.fear, diff: diff.fear } %}
+{% include "diff-complex.twig" with {caption: "Игровые предметы", old: old.possesions, new: new.possesions, diff: diff.possesions } %}
+{% include "diff-complex.twig" with {caption: "Чары",             old: old.charms, new: new.charms, diff: diff.charms } %}
+{% include "diff-complex.twig" with {caption: "Зелья",            old: old.potions, new: new.potions, diff: diff.potions } %}
+{% include "diff-complex.twig" with {caption: "Спецспособности",  old: old.abilities, new: new.abilities, diff: diff.abilities } %}
+{% include "diff-complex.twig" with {caption: "Хочет играть",     old: old.wish, new: new.wish, diff: diff.wish } %}
+{% include "diff-complex.twig" with {caption: "Не хочет играть",  old: old.antiwish, new: new.antiwish, diff: diff.antiwish } %}
+{% include "diff-complex.twig" with {caption: "Дополнительно",   old: old.addendum, new: new.addendum, diff: diff.addendum } %}
+
+{% include "mails/footer-admin.twig" %}

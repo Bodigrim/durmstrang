@@ -1,0 +1,13 @@
+{% if old != new %}
+  <br />
+  {{ caption }}:
+  {% for word in diff %}
+    {% if word[1] == 1 %}
+      <span style="background-color: #fdb8c0; text-decoration: line-through;"> {{ word[0] }}</span>
+    {% elseif word[1] == 2 %}
+      <span style="background-color: #acf2bd;"> {{ word[0] }}</span>
+    {% else %}
+      <span style="color: grey;"> {{ word[0] }}</span>
+    {% endif %}
+  {% endfor %}
+{% endif %}

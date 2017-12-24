@@ -19,6 +19,7 @@ require "mail.php";
 require "selectors.php";
 require "misc.php";
 require "file-upload.php";
+require "diff.php";
 
 mb_regex_encoding("utf-8");
 mb_internal_encoding("utf-8");

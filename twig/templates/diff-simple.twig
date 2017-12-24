@@ -1,0 +1,6 @@
+{% if old != new %}
+  <br />
+  {{ caption }}:
+  <span style="background-color: #fdb8c0; text-decoration: line-through;"> {{ old }}</span>
+  <span style="background-color: #acf2bd;"> {{ new }}</span>
+{% endif %}

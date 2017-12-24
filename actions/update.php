@@ -50,6 +50,36 @@ function sendMailGroupMemberAdded($userid, $userMail, $userName, $groupid){
 	send_mail_by_userid($groupid, $userSubject, $userText);
 }
 
+function prepareDiff($old, $new){
+	return Diff::compare($old, $new);
+	}
+
+function sendMailUpdatedApplication($old, $new){
+	global $langPublicities, $langBloods, $langBlocks;
+	$renderData =
+		[ "old"         => $old
+		, "new"         => $new
+		, "diff"        =>
+			[ "contraindication" => prepareDiff($old["contraindication"], $new["contraindication"])
+			, "quenta"           => prepareDiff($old["quenta"], $new["quenta"])
+			, "fear"             => prepareDiff($old["fear"], $new["fear"])
+			, "possesions"       => prepareDiff($old["possesions"], $new["possesions"])
+			, "charms"           => prepareDiff($old["charms"], $new["charms"])
+			, "potions"          => prepareDiff($old["potions"], $new["potions"])
+			, "abilities"        => prepareDiff($old["abilities"], $new["abilities"])
+			, "wish"             => prepareDiff($old["wish"], $new["wish"])
+			, "antiwish"         => prepareDiff($old["antiwish"], $new["antiwish"])
+			, "addendum"         => prepareDiff($old["addendum"], $new["addendum"])
+			]
+		, "publicities" => $langPublicities
+		, "bloods"      => $langBloods
+		, "blocks"      => $langBlocks
+		];
+	$adminSubject = "Заявка обновлена";
+	$adminText = constructTwig()->render("mails/updated-application.twig", $renderData);
+	send_mail_to_admin($adminSubject, $adminText);
+}
+
 function sendMailGroupMemberChange($userid, $userMail, $userName, $oldGroupid, $newGroupid){
 	if($oldGroupid){
 		sendMailGroupMemberLeft($userid, $userMail, $userName, $oldGroupid);
@@ -58,6 +88,15 @@ function sendMailGroupMemberChange($userid, $userMail, $userName, $oldGroupid, $
 		sendMailGroupMemberAdded($userid, $userMail, $userName, $newGroupid);
 	}
 }
+
+function fetchUserData($userid){
+	$sql = "SELECT u.*
+		FROM ".PREF."users AS u
+		WHERE u.id = $userid
+		LIMIT 1";
+	$result = query($sql);
+	return fetch_assoc($result);
+	}
 
 $post_get = new GetVarClass();
 $email = $post_get->getemail("email");
@@ -91,12 +130,8 @@ $block            = $post_get->getvar("block");
 $wish             = $post_get->getvar("wish");
 $antiwish         = $post_get->getvar("antiwish");
 
-$sql = "SELECT u.name
-	FROM ".PREF."users AS u
-	WHERE id = $userid
-	LIMIT 1";
-$result = query($sql);
-list($oldName) = fetch_row($result);
+$oldUserData = fetchUserData($userid);
+$oldName = $oldUserData["name"];
 
 $sql = "UPDATE ".PREF."users
 	SET name = '$name'
@@ -125,6 +160,11 @@ query($sql);
 
 $updated = (bool)affected_rows();
 
+if($updated){
+	$newUserData = fetchUserData($userid);
+	sendMailUpdatedApplication($oldUserData, $newUserData);
+	}
+
 if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 	$options = new FileUploadOptions();
 	$options->key = "photo";
@@ -141,14 +181,15 @@ if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 		rename("../photos/" . $filename, "../photos/" . $options->neoname);
 	}
 
-	$updated = true;
+	$updatedPhoto = true;
+	} else {
+	$updatedPhoto = false;
 	}
 
-if($updated){
+if($updated || $updatedPhoto){
 	$link = $_SERVER["HTTP_HOST"] . "/edit.php?" . http_build_query(["email" => $email]);
 	if($editorid==emailToId($email)){
 		markUpdated(emailToId($email));
-		// send_mail_to_admin("$name обновил заявку", "<a href=\"$link\">Просмотреть</a>");
 		}
 	else {
 		send_mail_by_userid(emailToId($email), "Админ отредактировал вашу заявку", "<a href=\"$link\">Просмотреть</a>");
