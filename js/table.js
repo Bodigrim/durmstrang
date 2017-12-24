@@ -77,15 +77,22 @@ $(function(){
       "<": "б",
       ">": "ю",
     };
-    return str.replace(/[A-Za-z\[\]\{\}\'\";:,.<>]/g, function(ch){
-      return dict[ch.toLowerCase()] || ch;
-    });
+    var ret = "";
+    for(var i = 0; i < str.length; i ++){
+      var ch = str.charAt(i).toLowerCase();
+      ret = ret + (dict[ch] || ch);
+    }
+    return ret;
+  };
+
+  var escapeRegExp = function(str) {
+    return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
   };
 
   var omnisearch = function(){
     var keyword = $("#omnibox").val();
     var keywordRu = toRussianLayout(keyword);
-    var regexp = new RegExp(keyword + "|" + keywordRu, "i");
+    var regexp = new RegExp(escapeRegExp(keyword) + "|" + escapeRegExp(keywordRu), "i");
     $('#users-table tr').each(function(){
       if(regexp.test($(this).html())){
         $(this).show();
