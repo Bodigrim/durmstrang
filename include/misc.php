@@ -129,8 +129,8 @@ function set_login_cookies($userid, $email, $pwhash){
 		ON DUPLICATE KEY UPDATE valid='$valid', ip=INET_ATON('$ip'), page='$page', pwhash='$pwhash'";
 	query($sql);
 
-	cookie_set_httponly("email",   $email,   0, "/");
-	cookie_set_httponly("session", $session, 0, "/");
+	cookie_set_httponly("email",   $email,   false, "/");
+	cookie_set_httponly("session", $session, false, "/");
 	}
 
 class UserRenderData
