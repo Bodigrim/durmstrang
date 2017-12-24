@@ -79,6 +79,16 @@
     </dd>
 
     <dt>
+      Годы обучения
+    </dt>
+    <dd>
+      {{ schoolYears.from }}&ndash;{{ schoolYears.to }}.
+      {% if schoolYears.grade %}
+        {{ schoolYears.grade }}-й курс.
+      {% endif %}
+    </dd>
+
+    <dt>
       Статус крови
     </dt>
     <dd>

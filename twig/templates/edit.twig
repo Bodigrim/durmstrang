@@ -131,6 +131,13 @@
         <div class="form-group">
           <label for="character_age">Дата рождения</label>
           <input type="date" class="form-control" id="character_age" placeholder="1990-12-31" name="character_age" value="{{ character_age }}" pattern="\d\d\d\d-\d\d-\d\d" title="В формате ГГГГ-ММ-ДД" />
+          <i>
+            Годы обучения в Хогвартсе (если применимо):
+            {{ schoolYears.from }}&ndash;{{ schoolYears.to }}.
+            {% if schoolYears.grade %}
+              Вы сейчас на {{ schoolYears.grade }}-м курсе.
+            {% endif %}
+          </i>
         </div>
 
         <div class="form-group">
