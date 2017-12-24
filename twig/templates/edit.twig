@@ -150,7 +150,22 @@
 
         <div class="form-group">
           <label for="possesions">Игровые предметы и существа (зелья, артефакты, магические животные и т. п.)</label>
-          <input type="text" class="form-control" id="possesions" placeholder="Если отсутствуют — оставьте поле пустым" name="possesions" value="{{ possesions }}" />
+          <textarea class="form-control" rows="4" id="possesions" name="possesions" placeholder="Если предпочтения отсутствуют, то оставьте поле пустым">{{ possesions }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="charms">Чары, которые персонаж умеет кастовать</label>
+          <textarea class="form-control" rows="4" id="charms" name="charms" placeholder="Если ничего не умеет, то оставьте поле пустым">{{ charms }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="potions">Зелья, которые персонаж умеет варить</label>
+          <textarea class="form-control" rows="4" id="potions" name="potions" placeholder="Если ничего не умеет, то оставьте поле пустым">{{ potions }}</textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="abilities">Специальные способности</label>
+          <textarea class="form-control" rows="4" id="abilities" name="abilities" placeholder="Если ничего не умеет, то оставьте поле пустым">{{ abilities }}</textarea>
         </div>
 
         <div class="form-group">
