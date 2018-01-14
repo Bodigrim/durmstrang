@@ -12,6 +12,7 @@
 {% include "diff-simple.twig" with {caption: "Telegram",         old: old.telegram, new: new.telegram } %}
 {% include "diff-simple.twig" with {caption: "Сетка ролей",      old: publicities[old.publicity], new: publicities[new.publicity] } %}
 {% include "diff-complex.twig" with {caption: "Противопоказания", old: old.contraindication, new: new.contraindication, diff: diff.contraindication } %}
+{% include "diff-simple.twig" with {caption: "Имя",              old: old.character_name, new: new.character_name } %}
 {% include "diff-simple.twig" with {caption: "Игровой блок",     old: blocks[old.block], new: blocks[new.block] } %}
 {% include "diff-simple.twig" with {caption: "Дата рождения",    old: old.character_age, new: new.character_age } %}
 {% include "diff-simple.twig" with {caption: "Статус крови",     old: bloods[old.blood], new: bloods[new.blood] } %}
