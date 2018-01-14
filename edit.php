@@ -1,15 +1,5 @@
 <?php
 
-function computeSchoolYears($birthday){
-	$date = strptime($birthday, "%Y-%m-%d");
-	$year = 1900 + $date["tm_year"];
-	$month = 1 + $date["tm_mon"];
-	$from  = $month < 9 ? $year + 11 : $year + 12;
-	$to    = $from + 7;
-	$grade = $from >= 1968 && $from <= 1974 ? 1975 - $from : "";
-	return ["from" => $from, "to" => $to, "grade" => $grade];
-}
-
 include "include/config.php";
 
 $post_get    = new GetVarClass("_GET");

@@ -1,0 +1,58 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+
+  <h2>
+    Список студентов
+
+    <div class="pull-right">
+    {% if isAdmin %}
+      <a href="/" class="btn btn-primary">
+        К таблице участников
+      </a>
+    {% elseif isLoggedIn %}
+      <a href="/" class="btn btn-primary">
+        К моей анкете
+      </a>
+      &nbsp;
+      <a href="/actions/logout.php" class="btn btn-danger">
+        Выйти
+      </a>
+    {% else %}
+      <a href="/" class="btn btn-primary">
+        Зарегистрироваться
+      </a>
+    {% endif %}
+    </div>
+
+  </h2>
+
+  <div class="row">
+
+  {% for faculty, grades in faculties %}
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <h3>
+        {{ blocks[faculty] }}
+      </h3>
+      {% for grade, students in grades %}
+        <h4>
+          {{ grade }} курс
+        </h4>
+        <ul>
+          {% for student in students %}
+            <li>
+              {{ student }}
+            </li>
+          {% endfor %}
+        </ul>
+      {% endfor %}
+    </div>
+  {% endfor  %}
+
+  </div>
+
+</div>
+
+{% include "footer.twig" with {additional_js : ["table.js"]} only %}
+{% endspaceless %}
