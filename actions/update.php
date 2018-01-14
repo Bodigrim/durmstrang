@@ -70,6 +70,7 @@ function sendMailUpdatedApplication($old, $new){
 			, "wish"             => prepareDiff($old["wish"], $new["wish"])
 			, "antiwish"         => prepareDiff($old["antiwish"], $new["antiwish"])
 			, "addendum"         => prepareDiff($old["addendum"], $new["addendum"])
+			, "master_note"      => prepareDiff($old["master_note"], $new["master_note"])
 			]
 		, "publicities" => $langPublicities
 		, "bloods"      => $langBloods
@@ -132,6 +133,7 @@ $addendum         = $post_get->getvar("addendum");
 $block            = $post_get->getvar("block");
 $wish             = $post_get->getvar("wish");
 $antiwish         = $post_get->getvar("antiwish");
+$master_note      = $post_get->getvar("master_note");
 
 $oldUserData = fetchUserData($userid);
 $oldName = $oldUserData["name"];
@@ -166,7 +168,20 @@ query($sql);
 
 $updated = (bool)affected_rows();
 
-if($updated){
+if(isAdmin($editorid)){
+	$sql = "UPDATE ".PREF."users
+		SET master_note = '$master_note'
+		WHERE id = $userid
+		LIMIT 1";
+	query($sql);
+	$updatedMaster_note = (bool)affected_rows();
+	}
+else {
+	$updatedMaster_note = false;
+	}
+
+
+if($updated || $updatedMaster_note){
 	$newUserData = fetchUserData($userid);
 	sendMailUpdatedApplication($oldUserData, $newUserData);
 	}

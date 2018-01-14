@@ -158,6 +158,15 @@
       {{ addendum | nl2br }}
     </dd>
 
+    {% if isAdmin %}
+      <dt>
+        Комментарий
+      </dt>
+      <dd>
+        {{ master_note | nl2br }}
+      </dd>
+    {% endif %}
+
   </dl>
 
     </div>
