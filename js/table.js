@@ -90,7 +90,7 @@ $(function(){
   };
 
   var omnisearch = function(){
-    var keyword = $("#omnibox").val();
+    var keyword = $("#omnibox").val().trim();
     var keywordRu = toRussianLayout(keyword);
     var regexp = new RegExp(escapeRegExp(keyword) + "|" + escapeRegExp(keywordRu), "i");
     $('#users-table tr').each(function(){
