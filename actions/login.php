@@ -16,7 +16,7 @@ E-mail {$email} не зарегистрирован.
 <br />
 Воспользуйтесь <a href="/#register">формой регистрации</a> на главной странице.
 <br />
-По техническим вопросам обращайтесь к Бодигриму (andrew.lelechenko@gmail.com, skype bodigrim).
+По техническим вопросам обращайтесь к Бодигриму (andrew.lelechenko@gmail.com, telegram @Bodigrim).
 EOT;
 	echo $text;
 
@@ -35,7 +35,7 @@ if(!$rows){
 <br />
 Воспользуйтесь <a href="/#register">формой входа</a> на главной странице еще раз.
 <br />
-По техническим вопросам обращайтесь к Бодигриму (andrew.lelechenko@gmail.com, skype bodigrim).
+По техническим вопросам обращайтесь к Бодигриму (andrew.lelechenko@gmail.com, telegram @Bodigrim).
 EOT;
 	echo $text;
 
