@@ -1,0 +1,44 @@
+<style>
+.passport {
+  page-break-inside: avoid;
+  border-bottom: 1px solid black;
+  padding: 20px;
+  column-count: 2;
+  column-gap: 40px;
+  text-align: justify;
+  }
+</style>
+{% for user in users %}
+  <div class="passport">
+    <b>ФИО:</b> {{ user.name }} {{ user.surname }}
+    {% if user.nick %}
+      ({{ user.nick }})
+    {% endif  %}
+    <br />
+
+    <b>Персонаж:</b> {{ user.character_name }}
+    {% if user.character_age != "0000-00-00" %}
+      ({{ user.character_age }})
+    {% endif %}
+    <br />
+
+    <b>Страхи:</b> {{ user.fear }}
+    <br />
+
+    <b>Игровые предметы:</b> {{ user.possesions }}
+    <br />
+
+    <b>Чары:</b> {{ user.charms }}
+    <br />
+
+    <b>Зелья:</b> {{ user.potions }}
+    <br />
+
+    <b>Спецспособности:</b> {{ user.abilities }}
+    <br />
+
+    <b>Уязвим к Лаэзе Кордис:</b>
+    <br />
+
+  </div>
+{% endfor %}
