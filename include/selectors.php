@@ -45,13 +45,15 @@ function convOptions2Html($options, $old, $withempty){
 $langStatuses = [
   'query'               => "Предварительная заявка",
   'participant'         => "Полная заявка",
+  'withdrawn'           => "Заявка снята игроком",
   'rejected'            => "Заявка отклонена",
 	];
 
 $ordStatuses = [
   'query'               => 0,
   'participant'         => 1,
-  'rejected'            => 2,
+  'withdrawn'           => 2,
+  'rejected'            => 3,
 	];
 
 $langCountries = [

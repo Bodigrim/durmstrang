@@ -9,7 +9,10 @@ if($editorid){
 
 $sql = "SELECT COUNT(*)
   FROM ".PREF."users AS u
-  WHERE u.active=1 AND u.name<>''";
+  WHERE u.active=1
+    AND u.name<>''
+    AND u.publicity<>'nothing'
+    AND u.status IN ('query', 'participant')";
 $userCount = (int)db_result00($sql);
 
 $a = rand(10, 99);
