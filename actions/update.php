@@ -71,6 +71,7 @@ function sendMailUpdatedApplication($old, $new){
 			, "antiwish"         => prepareDiff($old["antiwish"], $new["antiwish"])
 			, "addendum"         => prepareDiff($old["addendum"], $new["addendum"])
 			, "master_note"      => prepareDiff($old["master_note"], $new["master_note"])
+			, "quenta_public"    => prepareDiff($old["quenta_public"], $new["quenta_public"])
 			]
 		, "publicities" => $langPublicities
 		, "bloods"      => $langBloods
@@ -134,6 +135,8 @@ $block            = $post_get->getvar("block");
 $wish             = $post_get->getvar("wish");
 $antiwish         = $post_get->getvar("antiwish");
 $master_note      = $post_get->getvar("master_note");
+$quenta_public    = $post_get->getvar("quenta_public");
+$is_photo_public  = $post_get->getcheck("is_photo_public");
 
 $oldUserData = fetchUserData($userid);
 $oldName = $oldUserData["name"];
@@ -161,6 +164,8 @@ $sql = "UPDATE ".PREF."users
 		, block = '$block'
 		, wish = '$wish'
 		, antiwish = '$antiwish'
+		, quenta_public = '$quenta_public'
+		, is_photo_public = '$is_photo_public'
 
 	WHERE id = $userid
 	LIMIT 1";

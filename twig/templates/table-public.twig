@@ -37,6 +37,8 @@
     <thead>
       <tr>
         <th>
+        </th>
+        <th>
           Игрок
         </th>
         <th>
@@ -52,6 +54,13 @@
     </thead>
     {% for user in users %}
       <tr>
+        <td>
+          {% if user.is_photo_public and user.photo %}
+            <a href="/photos/{{ user.photo }}">
+              <img src="/photos/{{ user.photo }}" class="photo-thumbnail img-responsive" />
+            </a>
+          {% endif %}
+        </td>
         <td>
           {% if user.publicity == "full" %}
             {{ user.name }}
@@ -96,7 +105,11 @@
           {{ blocks[user.block] }}
         </td>
         <td>
-          {{ statuses[user.status] }}
+          {% if user.status=="participant" and user.quenta_public %}
+            {{ user.quenta_public }}
+          {% else %}
+            {{ statuses[user.status] }}
+          {% endif %}
         </td>
       </tr>
     {% endfor %}

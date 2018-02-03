@@ -7,6 +7,12 @@ footer {
   image-orientation: from-image;
 }
 
+.photo-thumbnail {
+  max-width: 80px;
+  max-height: 80px;
+  image-orientation: from-image;
+}
+
 h1 {
   font-size: 32px;
 }
