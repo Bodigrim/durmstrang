@@ -51,7 +51,26 @@ function sendMailGroupMemberAdded($userid, $userMail, $userName, $groupid){
 }
 
 function prepareDiff($old, $new){
-	return Diff::compare($old, $new);
+	$diff = Diff::compare($old, $new);
+
+	$diffSkipped = [];
+	$ellipsis = ["…", Diff::UNMODIFIED];
+	foreach($diff as $key => $word){
+		$skip = $word[1] == Diff::UNMODIFIED;
+		foreach([-3, -2, -1, 1, 2, 3] as $shift){
+			$skip = $skip && (!isset($diff[$key + $shift]) || $diff[$key + $shift][1] == Diff::UNMODIFIED);
+			}
+		if($skip){
+			$lastWord = count($diffSkipped) ? $diffSkipped[count($diffSkipped) - 1] : ["", Diff::UNMODIFIED];
+			if($lastWord != $ellipsis){
+				$diffSkipped[] = $ellipsis;
+				}
+			} else {
+			$diffSkipped[] = $word;
+			}
+		}
+
+	return $diffSkipped;
 	}
 
 function sendMailUpdatedApplication($old, $new){
