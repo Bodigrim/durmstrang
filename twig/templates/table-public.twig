@@ -105,7 +105,7 @@
           {{ blocks[user.block] }}
         </td>
         <td>
-          {% if user.status=="participant" and user.quenta_public %}
+          {% if user.quenta_public %}
             {{ user.quenta_public }}
           {% else %}
             {{ statuses[user.status] }}

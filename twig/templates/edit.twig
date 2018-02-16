@@ -190,18 +190,16 @@
           <textarea class="form-control" rows="4" id="addendum" name="addendum" placeholder="Если отсутствуют — оставьте поле пустым">{{ addendum }}</textarea>
         </div>
 
-        {% if status=="participant" %}
-          <div class="form-group">
-            <label for="quenta_public">Публичное представление</label>
-            <textarea class="form-control" rows="4" id="quenta_public" name="quenta_public" placeholder="Вы можете оставить это поле пустым">{{ quenta_public }}</textarea>
-          </div>
+        <div class="form-group">
+          <label for="quenta_public">Публичное представление</label>
+          <textarea class="form-control" rows="4" id="quenta_public" name="quenta_public" placeholder="Вы можете оставить это поле пустым">{{ quenta_public }}</textarea>
+        </div>
 
-          <div class="checkbox">
-            <label>
-              <input type="checkbox" name="is_photo_public" {% if is_photo_public %} checked {% endif %}> Показать мое фото всем
-            </label>
-          </div>
-        {% endif %}
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="is_photo_public" {% if is_photo_public %} checked {% endif %}> Показать мое фото всем
+          </label>
+        </div>
 
         {% if isAdmin %}
           <div class="form-group">
