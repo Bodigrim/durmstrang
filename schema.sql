@@ -7,6 +7,7 @@ CREATE TABLE `hogwarts_messages` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `userid` int(10) unsigned NOT NULL,
   `authorid` int(10) unsigned NOT NULL,
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `message` text,
   PRIMARY KEY (`id`)
 );

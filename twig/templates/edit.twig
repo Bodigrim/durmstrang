@@ -214,7 +214,11 @@
         <div id="messages">
           {% for message in messages %}
             <b>
-              {{ message.name }}:
+              {% if message.created > "2018-02-18 19:43:32" %}
+                {{ message.name }} @ {{ message.created | date("Y-m-d, H:i") }}
+              {% else %}
+                {{ message.name }}:
+              {% endif %}
             </b>
             <br />
             {{ message.message | nl2br }}

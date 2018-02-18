@@ -29,7 +29,7 @@ if(isAdmin($editorid)){
 	unmarkUnread($userid);
 	}
 
-$sql = "SELECT m.id, u.name, m.message
+$sql = "SELECT m.id, u.name, m.message, m.created
 	FROM ".PREF."messages AS m
 	LEFT JOIN ".PREF."users AS u ON m.authorid=u.id
 	WHERE m.userid=$userid
