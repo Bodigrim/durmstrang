@@ -19,6 +19,7 @@
   ],
   "dependencies": {
     "bootstrap-sortable": "~1.11.2",
-    "bootstrap": "~3.3.5"
+    "bootstrap": "~3.3.5",
+    "Sortable": "sortablejs#^1.6.0"
   }
 }
