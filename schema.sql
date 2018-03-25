@@ -68,3 +68,17 @@ CREATE TABLE `hogwarts_users` (
   KEY `active` (`active`),
   KEY `email` (`email`(20))
 );
+CREATE TABLE `hogwarts_texts` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `header` text NOT NUll,
+  `text_public` text NOT NULL,
+  `text_private` text NOT NULL,
+  PRIMARY KEY (`id`)
+);
+CREATE TABLE `hogwarts_text_rights` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `textid` int(10) unsigned NOT NULL,
+  `userid` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `textid_userid` (`textid`, `userid`)
+);

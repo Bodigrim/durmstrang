@@ -1,0 +1,65 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+
+
+  <h2>
+    Тексты
+
+    <div class="pull-right">
+      <a href="/" class="btn btn-primary">
+        К таблице участников
+      </a>
+    </div>
+
+  </h2>
+
+  <table id="users-table" class="table table-striped sortable">
+    <thead>
+      <tr>
+        <th>
+          Название
+        </th>
+        <th>
+          Краткое содержание
+        </th>
+        <th>
+          Доступен
+        </th>
+      </tr>
+    </thead>
+    {% for text in texts %}
+      <tr id="{{ text.id }}">
+        <td>
+          <a href="/text-edit.php?id={{ text.id }}">
+            <i class="glyphicon glyphicon-edit"></i>
+            {{ text.header }}
+          </a>
+        </td>
+        <td>
+          {{ text.text_public | slice(0, 100) }}…
+        </td>
+        <td>
+          {{ text.count }}
+        </td>
+      </tr>
+    {% endfor %}
+  </table>
+
+
+
+  <h2>
+    Новый текст
+  </h2>
+  <form action="/actions/text-create.php" method="post">
+    <div class="form-group">
+      <label for="header">Название</label>
+      <input type="text" class="form-control" id="header" placeholder="Розмарин в условиях средней полосы" name="header" required />
+    </div>
+    <button type="submit" class="btn btn-default">Добавить</button>
+  </form>
+</div>
+
+{% include "footer.twig" with {additional_js : ["table.js"]} only %}
+{% endspaceless %}

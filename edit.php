@@ -37,6 +37,14 @@ $sql = "SELECT m.id, u.name, m.message, m.created
 $result = query($sql);
 $messages = fetch_assocs($result);
 
+$sql = "SELECT t.header, t.text_public
+	FROM ".PREF."texts AS t
+	INNER JOIN ".PREF."text_rights AS tr ON tr.textid=t.id
+	WHERE tr.userid=$userid
+	ORDER BY t.header";
+$result = query($sql);
+$texts = fetch_assocs($result);
+
 $render_data = $userData + [
 	"justUpdated"      => (bool)$justUpdated,
 	"isAdmin"          => (bool)isAdmin($editorid),
@@ -46,6 +54,7 @@ $render_data = $userData + [
 	"blocks"           => $langBlocks,
 	"messages"         => $messages,
 	"schoolYears"      => computeSchoolYears($userData["character_age"]),
+	"texts"            => $texts,
   ];
 
 $template = $print ? "print.twig" : "edit.twig";

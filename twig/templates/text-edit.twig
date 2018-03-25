@@ -1,0 +1,59 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
+
+  <h2>
+    Текст
+
+    <div class="pull-right">
+      <a href="/texts.php" class="btn btn-primary">
+        К списку всех текстов
+      </a>
+    </div>
+  </h2>
+
+  <form action="/actions/text-update.php" method="post" id="edit" enctype="multipart/form-data">
+    <input type="hidden" name="id" id="id" value="{{ id }}" />
+
+    <div class="form-group">
+      <label for="header">Название</label>
+      <input type="text" class="form-control" id="header" placeholder="Розмарин в условиях средней полосы" name="header" value="{{ header }}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="text_public">Текст</label>
+      <textarea class="form-control" rows="{{ max(12, text_public|length // 80) }}" id="text_public" name="text_public" placeholder="Этот текст будет доступен всем персонажам, помеченным галочкой ниже">{{ text_public }}</textarea>
+    </div>
+
+    <div style="columns: 3">
+      {% for right in rights %}
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="right[]" {% if right.selected %}checked{% endif %} value="{{ right.id }}"> {{ right.character_name }}
+          </label>
+        </div>
+      {% endfor %}
+    </div>
+    <br />
+
+    <div class="form-group">
+      <label for="text_private">Мастерский комментарий</label>
+      <textarea class="form-control" rows="4" id="text_private" name="text_private" placeholder="Этот текст будет доступен только мастерам">{{ text_private }}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-lg">Сохранить</button>
+  </form>
+
+        <div class="pull-right">
+          <a class="btn btn-danger btn-xs" data-id="{{ id }}" id="delete-btn">Удалить текст</a>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+{% include "footer.twig" with {additional_js : ["text-edit.js"]} only %}
+{% endspaceless %}
