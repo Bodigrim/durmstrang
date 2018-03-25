@@ -1,0 +1,74 @@
+{% spaceless %}
+{% include "header.twig" %}
+
+<style>
+.house {
+  position: absolute;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 5px;
+  min-width: 10%;
+}
+
+.tile__name {
+  font-weight: bold;
+}
+
+.tile__list {
+  padding: 5px;
+  background-color: orange;
+  font-size: 80%;
+}
+
+.tile__list__red {
+  background-color: red !important;
+}
+
+.inhabitant {
+  cursor: move;
+}
+</style>
+
+<div class="container-fluid">
+
+
+  <h2>
+    Расселение
+
+    <div class="pull-right">
+      <a href="/" class="btn">
+        К таблице участников
+      </a>
+
+      <a id="save-button" class="btn btn-primary">
+        Сохранить
+      </a>
+    </div>
+
+  </h2>
+
+  <div id="multi" style="height: 2300px;">
+    {% for house in houses %}
+      <div class="house" data-houseid="{{ house.id }}" style="left: {{ 2 + house.left / 100 * 96 }}%; top: {{ house.top + 100 }}px;">
+        <div class="tile__name">
+          {{ house.name }}
+          {% if house.capacity > 0 %}
+            {{ house.capacity }}
+          {% endif %}
+        </div>
+        {% if house.capacity > 0 %}
+          <div class="tile__list {% if inhabitants[house.id] | length > house.capacity %}tile__list__red{% endif %}" data-capacity="{{ house.capacity }}">
+            {% for inhabitant in inhabitants[house.id] %}
+              <div class="inhabitant" data-inhabitantid="{{ inhabitant[0] }}">
+                {{ inhabitant[1] }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  </div>
+
+
+{% include "footer.twig" with {additional_js : ["houses.js"]} only %}
+{% endspaceless %}
