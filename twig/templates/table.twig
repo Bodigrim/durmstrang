@@ -57,6 +57,10 @@
             {% if user.unread %}
               &nbsp; <span class="label label-danger" title="Новое сообщение"><i class="glyphicon glyphicon-envelope"></i></span>
             {% endif %}
+
+            {% if user.photo %}
+              <img src="/photos-low/80.0.{{ user.photo }}" class="photo-thumbnail img-responsive" />
+            {% endif %}
           </a>
         </td>
         <td>

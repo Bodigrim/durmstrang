@@ -57,7 +57,7 @@
         <td>
           {% if user.is_photo_public and user.photo %}
             <a href="/photos/{{ user.photo }}">
-              <img src="/photos/{{ user.photo }}" class="photo-thumbnail img-responsive" />
+              <img src="/photos-low/80.0.{{ user.photo }}" class="photo-thumbnail img-responsive" />
             </a>
           {% endif %}
         </td>

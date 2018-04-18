@@ -13,6 +13,11 @@ $sql = "SELECT u.*
 $result = query($sql);
 $userData = fetch_assocs($result);
 
+foreach($userData as &$user){
+  $photoname = photoFileName($user["email"]);
+  $user["photo"] = file_exists("photos/$photoname.jpg") ? "$photoname.jpg" : "";
+  }
+
 $render_data = [
 	"users"       => $userData,
 	"statuses"    => $langStatuses,
