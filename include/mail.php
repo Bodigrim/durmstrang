@@ -45,10 +45,9 @@ function send_mail_to_first($emails, $subject, $text){
 function send_mail_to_admin($subject, $text){
 	$sql = "SELECT email
 		FROM ".PREF."users
-		WHERE is_admin<>0";
+		WHERE is_admin<>0 AND no_admin_mail=0";
 	$result = query($sql);
 	$emails = fetch_column($result);
-	// $emails[] = "reg@youkon.com.ua";
 	return send_mail_to_all($emails, $subject, $text);
 	}
 
