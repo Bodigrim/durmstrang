@@ -11,6 +11,7 @@ $sql = "SELECT u.*
     AND u.publicity<>'nothing'
     AND u.block IN ('gryffindor', 'slytherin', 'ravenclaw', 'hufflepuff')
     AND u.character_name<>''
+    AND u.status IN ('query', 'participant')
   ORDER BY u.block ASC, u.character_age ASC";
 $result = query($sql);
 $userData = fetch_assocs($result);

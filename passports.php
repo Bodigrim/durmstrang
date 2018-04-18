@@ -8,7 +8,10 @@ if(!isAdmin($editorid))
 
 $sql = "SELECT u.*
   FROM ".PREF."users AS u
-  WHERE u.active=1 AND u.surname<>'' AND u.email NOT LIKE '%@example.com'
+  WHERE u.active=1
+    AND u.surname<>''
+    AND u.email NOT LIKE '%@example.com'
+    AND u.status IN ('query', 'participant')
   ORDER BY u.surname ASC, u.name ASC";
 $result = query($sql);
 $userData = fetch_assocs($result);
