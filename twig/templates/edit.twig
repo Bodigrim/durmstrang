@@ -151,6 +151,11 @@
           <textarea class="form-control" rows="{{ max(12, quenta|length // 80) }}" id="quenta" name="quenta" placeholder="Я шотландский дроу-ассасин, родился сиротой...">{{ quenta }}</textarea>
         </div>
 
+        {% if speciality %}
+          <label>Специализации:</label>
+          {% include "specialities.twig" %}
+        {% endif %}
+
         <div class="form-group">
           <label for="fear">Что вызывает у персонажа страх? Минимум три вещи</label>
           <textarea class="form-control" rows="4" id="fear" name="fear" placeholder="Кино, вино и домино">{{ fear }}</textarea>

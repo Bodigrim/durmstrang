@@ -52,6 +52,7 @@ $render_data = $userData + [
 	"publicities"      => $langPublicities,
 	"bloods"           => $langBloods,
 	"blocks"           => $langBlocks,
+	"specialities"     => $langSpecialities,
 	"messages"         => $messages,
 	"schoolYears"      => computeSchoolYears($userData["character_age"]),
 	"texts"            => $texts,

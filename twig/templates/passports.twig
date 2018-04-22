@@ -22,6 +22,12 @@
     {% endif %}
     <br />
 
+    {% if user.speciality %}
+      <b>Специальности:</b>
+      {% include "specialities.twig" with {speciality: user.speciality} %}
+      <br />
+    {% endif %}
+
     <b>Страхи:</b> {{ user.fear }}
     <br />
 

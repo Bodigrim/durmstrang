@@ -102,6 +102,15 @@
       {{ quenta | nl2br }}
     </dd>
 
+    {% if speciality %}
+      <dt>
+        Специализации
+      </dt>
+      <dd>
+        {% include "specialities.twig" %}
+      </dd>
+    {% endif %}
+
     <dt>
       Страхи
     </dt>

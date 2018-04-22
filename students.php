@@ -27,18 +27,39 @@ $romanNumerals =
   ];
 
 $faculties = [];
-foreach ($userData as $user){
+foreach($userData as $user){
   $block = $user["block"];
   $grade = computeSchoolYears($user["character_age"])["grade"];
   $gradeRoman = isset($romanNumerals[$grade]) ? $romanNumerals[$grade] : "Неизвестный";
-  $faculties[$block][$gradeRoman][] = $user["character_name"];
+  $speciality = $user["speciality"];
+
+  $faculties[$block][$gradeRoman][] =
+    [ "name"       => $user["character_name"]
+    , "speciality" => $speciality
+    ];
+
+  if($speciality){
+    foreach(explode(",", $speciality) as $spec){
+      $specs[$spec][] =
+        [ "name"       => $user["character_name"]
+        , "speciality" => $speciality
+        ];
+      }
+    }
   }
 
+foreach($specs as &$students){
+  usort($students, function($a, $b){return strnatcmp($a["name"], $b["name"]);});
+  }
+uasort($specs, function($a, $b){return count($b) - count($a);});
+
 $render_data = [
-  "faculties"  => $faculties,
-  "blocks"     => $langBlocks,
-  "isAdmin"    => (bool)isAdmin($editorid),
-  "isLoggedIn" => (bool)$editorid,
+  "faculties"    => $faculties,
+  "blocks"       => $langBlocks,
+  "specs"        => $specs,
+  "specialities" => $langSpecialities,
+  "isAdmin"      => (bool)isAdmin($editorid),
+  "isLoggedIn"   => (bool)$editorid,
   ];
 
 $ret = constructTwig()->render("students.twig", $render_data);

@@ -4,7 +4,7 @@
 <div class="container-fluid">
 
   <h2>
-    Список студентов
+    Факультеты
 
     <div class="pull-right">
     {% if isAdmin %}
@@ -42,11 +42,41 @@
         <ul>
           {% for student in students %}
             <li>
-              {{ student }}
+              {{ student.name }}
+              {% if student.speciality %}
+                ({% include "specialities.twig" with {speciality: student.speciality} %})
+              {% endif %}
             </li>
           {% endfor %}
         </ul>
       {% endfor %}
+    </div>
+  {% endfor  %}
+
+  </div>
+
+  <h2>
+    Специализации
+  </h2>
+
+  <div class="row">
+
+  {% for spec, students in specs %}
+    <div class="col-sm-6 col-md-4 col-lg-3">
+      <h3>
+        {% if spec=="dark" %}
+          ЗОТИ
+        {% else %}
+          {{ specialities[spec] | title }}
+        {% endif %}
+      </h3>
+      <ul>
+        {% for student in students %}
+          <li>
+            {{ student.name }}
+          </li>
+        {% endfor %}
+      </ul>
     </div>
   {% endfor  %}
 

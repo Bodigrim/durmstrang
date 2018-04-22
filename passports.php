@@ -17,7 +17,8 @@ $result = query($sql);
 $userData = fetch_assocs($result);
 
 $render_data = [
-  "users"       => $userData,
+  "users"        => $userData,
+  "specialities" => $langSpecialities,
   ];
 
 $ret = constructTwig()->render("passports.twig", $render_data);

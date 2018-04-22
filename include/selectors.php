@@ -88,6 +88,20 @@ $langBlocks = [
   "aurors"       => "Аврорат",
   ];
 
+$langSpecialities = [
+  "astronomy"       => "астрономия",
+  "herbology"       => "гербология",
+  "history"         => "история магии",
+  "muggle"          => "маггловедение",
+  "transfiguration" => "трансфигурация",
+  "runes"           => "рунология",
+  "dark"            => "ЗОТИ",
+  "potions"         => "зельеварение",
+  "charms"          => "чары",
+  "divination"      => "прорицания",
+  "theory"          => "теория магии",
+  ];
+
 class House {
   public $id;
   public $name;

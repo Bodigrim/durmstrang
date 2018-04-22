@@ -65,6 +65,7 @@ CREATE TABLE `hogwarts_users` (
   `fear` text NOT NULL,
   `wish` text NOT NULL,
   `antiwish` text NOT NULL,
+  `speciality` SET('astronomy', 'herbology', 'history', 'muggle', 'transfiguration', 'runes', 'dark', 'potions', 'charms', 'divination', 'theory') NOT NULL,
   UNIQUE KEY `id` (`id`),
   KEY `active` (`active`),
   KEY `email` (`email`(20))
