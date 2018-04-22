@@ -3,6 +3,22 @@
 
 <div class="container-fluid">
 
+  {% if missing | length %}
+    <b>
+      Не указаны противопоказания:
+    </b>
+    <ul>
+      {% for user in missing %}
+        <li>
+          <a href="/edit.php?email={{ user.email | url_encode }}">
+            {{ user.surname }}
+            {{ user.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+
   <table class="table">
     <thead>
       <tr>
@@ -17,8 +33,7 @@
     {% for user in users %}
       <tr>
         <td>
-          {{ user.surname }}
-          {{ user.name }}
+          {{ user.surname }}&nbsp;{{ user.name }}
         </td>
         <td>
           {{ user.contraindication }}
