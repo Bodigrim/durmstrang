@@ -22,7 +22,10 @@ $textDatа = fetch_assoc($result);
 $sql = "SELECT u.id, u.character_name, IF(tr.id, 1, 0) as selected
   FROM ".PREF."users AS u
   LEFT JOIN ".PREF."text_rights AS tr ON u.id=tr.userid AND tr.textid=$textid
-  WHERE u.active=1  AND u.character_name<>'' AND u.email NOT LIKE '%@example.com'
+  WHERE u.active=1
+    AND u.character_name<>''
+    AND u.email NOT LIKE '%@example.com'
+    AND u.status IN ('query', 'participant')
   ORDER BY u.character_name ASC";
 $result = query($sql);
 $rights = fetch_assocs($result);
