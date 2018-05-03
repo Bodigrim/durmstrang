@@ -10,7 +10,7 @@
 </style>
 {% for user in users %}
   <div class="passport">
-    <b>ФИО:</b> {{ user.name }} {{ user.surname }}
+    <b>ФИО:</b> {{ user.surname }} {{ user.name }}
     {% if user.nick %}
       ({{ user.nick }})
     {% endif  %}
@@ -23,7 +23,7 @@
     <br />
 
     {% if user.speciality %}
-      <b>Специальности:</b>
+      <b>Специализации:</b>
       {% include "specialities.twig" with {speciality: user.speciality} %}
       <br />
     {% endif %}
