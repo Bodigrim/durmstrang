@@ -225,6 +225,9 @@ if(isset($_FILES["photo"]) && $_FILES["photo"]['error']!=4){
 	if($filename!=$options->neoname){
 		rename("../photos/" . $filename, "../photos/" . $options->neoname);
 	}
+	foreach(glob("../photos-low/*" . $filename) as $previewName) {
+		unlink($previewName);
+	}
 
 	$updatedPhoto = true;
 	} else {
