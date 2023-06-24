@@ -8,3 +8,7 @@
 
 Для верстальщиков. Если к вам пришла муза, и вы хотите сделать дизайн для этого сайта - фил фри форкнуть 
 репозиторий. 
+
+В ветках [`hogwarts`](https://github.com/Bodigrim/durmstrang/tree/hogwarts) 
+и [`youkon`](https://github.com/Bodigrim/durmstrang/tree/youkon) 
+лежат исходники сайтов других украинских ролевых проектов.
